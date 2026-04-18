@@ -1,0 +1,166 @@
+{
+  "$schema": "https://raw.githubusercontent.com/MrGooRoo/KFI-Project/main/data/schema.json",
+  "version": "2.0",
+  "updated": "2026-04-18",
+  "emitters": [
+    {
+      "emitter_id": "CARMONEY",
+      "name": "ООО «Кармани»",
+      "inn": "9715291160",
+      "sector": "МФО",
+      "sector_profile": "profile_mfo",
+      "description": "Микрофинансовая организация, специализируется на займах под залог автомобиля",
+      "founded_year": 2013,
+      "region": "Москва",
+      "website": "https://carmoney.ru",
+      "sources": {
+        "e_disclosure_id": "carmoney",
+        "moex_emitter_id": null,
+        "rating_agency": "Эксперт РА",
+        "rating_value": "ruBB+",
+        "rating_outlook": "Стабильный",
+        "rating_date": "2025-09-01"
+      },
+      "bonds": [
+        {
+          "isin": "RU000A105FS4",
+          "ticker": "CARM001",
+          "board_id": "TQCB",
+          "name": "Кармани БО-01",
+          "coupon_rate": 15.5,
+          "coupon_type": "Фиксированный",
+          "coupon_frequency": 12,
+          "next_coupon_date": "2026-05-15",
+          "offer_date": null,
+          "maturity_date": "2027-04-15",
+          "issue_volume_rub": 500000000,
+          "face_value": 1000,
+          "currency": "RUB"
+        }
+      ],
+      "qualitative_flags": {
+        "owner_group_support": false,
+        "revenue_concentration_risk": false,
+        "litigation_risk": false,
+        "affiliated_loans_risk": false,
+        "disclosure_delays": false,
+        "market_maker_present": true,
+        "organizer_reputable": true,
+        "esg_controversies": false,
+        "management_changes_recent": false,
+        "auditor_qualified": false
+      },
+      "meta": {
+        "added_date": "2026-04-18",
+        "last_updated": "2026-04-18",
+        "analyst_notes": "Тестовый эмитент для отладки методологии. МФО-профиль."
+      }
+    },
+    {
+      "emitter_id": "GTRK",
+      "name": "ООО «ГТЛК» (ГТЛК)",
+      "inn": "7720284983",
+      "sector": "Лизинг",
+      "sector_profile": "profile_leasing",
+      "description": "Государственная транспортная лизинговая компания",
+      "founded_year": 2001,
+      "region": "Москва",
+      "website": "https://gtlk.ru",
+      "sources": {
+        "e_disclosure_id": "gtlk",
+        "moex_emitter_id": null,
+        "rating_agency": "АКРА",
+        "rating_value": "A+(RU)",
+        "rating_outlook": "Стабильный",
+        "rating_date": "2025-11-01"
+      },
+      "bonds": [
+        {
+          "isin": "RU000A102SG8",
+          "ticker": "GTLK001",
+          "board_id": "TQCB",
+          "name": "ГТЛК БО-001P-15",
+          "coupon_rate": 9.7,
+          "coupon_type": "Фиксированный",
+          "coupon_frequency": 2,
+          "next_coupon_date": "2026-06-01",
+          "offer_date": null,
+          "maturity_date": "2029-12-01",
+          "issue_volume_rub": 10000000000,
+          "face_value": 1000,
+          "currency": "RUB"
+        }
+      ],
+      "qualitative_flags": {
+        "owner_group_support": true,
+        "revenue_concentration_risk": false,
+        "litigation_risk": false,
+        "affiliated_loans_risk": false,
+        "disclosure_delays": false,
+        "market_maker_present": true,
+        "organizer_reputable": true,
+        "esg_controversies": false,
+        "management_changes_recent": false,
+        "auditor_qualified": true
+      },
+      "meta": {
+        "added_date": "2026-04-18",
+        "last_updated": "2026-04-18",
+        "analyst_notes": "Тестовый эмитент. Лизинговый профиль, государственное участие."
+      }
+    },
+    {
+      "emitter_id": "SELTL",
+      "name": "ООО «Сэтл Групп»",
+      "inn": "7840395960",
+      "sector": "Девелопмент",
+      "sector_profile": "profile_developer",
+      "description": "Девелопер жилой недвижимости, Санкт-Петербург и регионы",
+      "founded_year": 1994,
+      "region": "Санкт-Петербург",
+      "website": "https://setl-group.ru",
+      "sources": {
+        "e_disclosure_id": "setlgroup",
+        "moex_emitter_id": null,
+        "rating_agency": "АКРА",
+        "rating_value": "A(RU)",
+        "rating_outlook": "Стабильный",
+        "rating_date": "2025-08-15"
+      },
+      "bonds": [
+        {
+          "isin": "RU000A107U95",
+          "ticker": "SETL001",
+          "board_id": "TQCB",
+          "name": "Сэтл Групп БО-П01",
+          "coupon_rate": 13.5,
+          "coupon_type": "Фиксированный",
+          "coupon_frequency": 4,
+          "next_coupon_date": "2026-07-01",
+          "offer_date": "2027-07-01",
+          "maturity_date": "2029-07-01",
+          "issue_volume_rub": 5000000000,
+          "face_value": 1000,
+          "currency": "RUB"
+        }
+      ],
+      "qualitative_flags": {
+        "owner_group_support": false,
+        "revenue_concentration_risk": false,
+        "litigation_risk": false,
+        "affiliated_loans_risk": false,
+        "disclosure_delays": false,
+        "market_maker_present": true,
+        "organizer_reputable": true,
+        "esg_controversies": false,
+        "management_changes_recent": false,
+        "auditor_qualified": true
+      },
+      "meta": {
+        "added_date": "2026-04-18",
+        "last_updated": "2026-04-18",
+        "analyst_notes": "Тестовый эмитент. Девелоперский профиль, длинный операционный цикл."
+      }
+    }
+  ]
+}
