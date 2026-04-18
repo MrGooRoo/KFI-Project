@@ -36,7 +36,7 @@ GitHub — это **онлайн-хранилище файлов** с истор
 
 ✅ Готово! У вас есть репозиторий. Его адрес будет:
 ```
-https://github.com/ВАШЕ_ИМЯ/kfi-project
+https://github.com/MrGooRoo/kfi-project
 ```
 
 ---
@@ -113,7 +113,7 @@ kfi-project/
 
 ```
 Прочитай файл методологии из моего проекта:
-https://github.com/ВАШЕ_ИМЯ/kfi-project/blob/main/docs/methodology.md
+https://github.com/MrGooRoo/kfi-project/blob/main/docs/methodology.md
 
 И продолжим работу по этапу 3 (парсер MOEX).
 ```
@@ -130,12 +130,12 @@ https://github.com/ВАШЕ_ИМЯ/kfi-project/blob/main/docs/methodology.md
 2. Нажмите кнопку **"Raw"** (справа вверху от содержимого файла)
 3. Скопируйте URL из адресной строки — он будет вида:
 ```
-https://raw.githubusercontent.com/ВАШЕ_ИМЯ/kfi-project/main/docs/methodology.md
+https://raw.githubusercontent.com/MrGooRoo/kfi-project/main/docs/methodology.md
 ```
 Эту ссылку и давайте мне.
 
 ### Как посмотреть все файлы проекта:
-Корневая ссылка: `https://github.com/ВАШЕ_ИМЯ/kfi-project`
+Корневая ссылка: `https://github.com/MrGooRoo/kfi-project`
 
 ---
 
