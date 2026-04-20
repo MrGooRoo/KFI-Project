@@ -14,7 +14,7 @@
 Я разрабатываю систему анализа эмитентов ВДО (высокодоходных облигаций).
 
 Прочитай файл методологии моего проекта:
-https://raw.githubusercontent.com/MrGooRoo/kfi-project/main/docs/methodology.md
+https://raw.githubusercontent.com/MrGooRoo/KFI-Project/main/docs/methodology.md
 
 Задачи на этот чат:
 1. Доработать отраслевые профили: задать конкретные пороги показателей для 5 групп (нефинансовый бизнес, лизинг, МФО, девелоперы, финансовые посредники)
@@ -34,7 +34,7 @@ https://raw.githubusercontent.com/MrGooRoo/kfi-project/main/docs/methodology.md
 Я делаю проект анализа эмитентов ВДО.
 
 Прочитай roadmap проекта:
-https://raw.githubusercontent.com/MrGooRoo/kfi-project/main/docs/roadmap.md
+https://raw.githubusercontent.com/MrGooRoo/KFI-Project/main/docs/roadmap.md
 
 Сейчас этап 3 — парсер MOEX ISS API.
 
@@ -60,7 +60,7 @@ API MOEX бесплатный: https://iss.moex.com/iss/reference/
 Я делаю проект анализа эмитентов ВДО.
 
 Прочитай методологию:
-https://raw.githubusercontent.com/MrGooRoo/kfi-project/main/docs/methodology.md
+https://raw.githubusercontent.com/MrGooRoo/KFI-Project/main/docs/methodology.md
 
 Сейчас этап 4 — сбор финансовых данных.
 
@@ -82,10 +82,10 @@ https://raw.githubusercontent.com/MrGooRoo/kfi-project/main/docs/methodology.md
 Я делаю проект анализа эмитентов ВДО.
 
 Прочитай методологию:
-https://raw.githubusercontent.com/MrGooRoo/kfi-project/main/docs/methodology.md
+https://raw.githubusercontent.com/MrGooRoo/KFI-Project/main/docs/methodology.md
 
 Прочитай парсер данных:
-https://raw.githubusercontent.com/MrGooRoo/kfi-project/main/src/moex_parser.py
+https://raw.githubusercontent.com/MrGooRoo/KFI-Project/main/src/moex_parser.py
 
 Сейчас этап 5 — расчётный движок.
 
@@ -110,7 +110,7 @@ https://raw.githubusercontent.com/MrGooRoo/kfi-project/main/src/moex_parser.py
 Я делаю проект анализа эмитентов ВДО.
 
 Прочитай методологию (там описан дизайн карточки):
-https://raw.githubusercontent.com/MrGooRoo/kfi-project/main/docs/methodology.md
+https://raw.githubusercontent.com/MrGooRoo/KFI-Project/main/docs/methodology.md
 
 Сейчас этап 6 — визуализация аналитической карточки.
 
@@ -135,10 +135,10 @@ https://raw.githubusercontent.com/MrGooRoo/kfi-project/main/docs/methodology.md
 Я делаю проект анализа эмитентов ВДО.
 
 Прочитай roadmap:
-https://raw.githubusercontent.com/MrGooRoo/kfi-project/main/docs/roadmap.md
+https://raw.githubusercontent.com/MrGooRoo/KFI-Project/main/docs/roadmap.md
 
 Прочитай шаблон карточки:
-https://raw.githubusercontent.com/MrGooRoo/kfi-project/main/src/card_template.html
+https://raw.githubusercontent.com/MrGooRoo/KFI-Project/main/src/card_template.html
 
 Сейчас этап 7 — веб-сайт.
 
@@ -164,7 +164,7 @@ https://raw.githubusercontent.com/MrGooRoo/kfi-project/main/src/card_template.ht
 Я делаю проект анализа эмитентов ВДО.
 
 Прочитай roadmap:
-https://raw.githubusercontent.com/MrGooRoo/kfi-project/main/docs/roadmap.md
+https://raw.githubusercontent.com/MrGooRoo/KFI-Project/main/docs/roadmap.md
 
 Сейчас этап 8 — бэкенд и БД.
 
@@ -189,7 +189,7 @@ https://raw.githubusercontent.com/MrGooRoo/kfi-project/main/docs/roadmap.md
 Я делаю проект анализа эмитентов ВДО.
 
 Прочитай roadmap:
-https://raw.githubusercontent.com/MrGooRoo/kfi-project/main/docs/roadmap.md
+https://raw.githubusercontent.com/MrGooRoo/KFI-Project/main/docs/roadmap.md
 
 Сейчас этап 9 — автоматизация через n8n.
 
@@ -215,7 +215,7 @@ https://raw.githubusercontent.com/MrGooRoo/kfi-project/main/docs/roadmap.md
 Я делаю проект анализа эмитентов ВДО.
 
 Прочитай методологию:
-https://raw.githubusercontent.com/MrGooRoo/kfi-project/main/docs/methodology.md
+https://raw.githubusercontent.com/MrGooRoo/KFI-Project/main/docs/methodology.md
 
 Сейчас этап 10 — автоматическая генерация текстовых заключений через LLM.
 
@@ -238,7 +238,7 @@ https://raw.githubusercontent.com/MrGooRoo/kfi-project/main/docs/methodology.md
 Я делаю проект анализа эмитентов ВДО.
 
 Прочитай все файлы проекта:
-https://github.com/MrGooRoo/kfi-project
+https://github.com/MrGooRoo/KFI-Project
 
 Сейчас финальный этап — сборка и тестирование.
 
