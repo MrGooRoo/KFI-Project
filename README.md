@@ -42,7 +42,7 @@ kfi-project/
 ├── docs/
 │   ├── methodology.md         ← Полная методология КФИ v2.0
 │   ├── roadmap.md             ← План проекта по этапам
-│   └── prompts.md             ← Промпты для разработки
+│   └── Chat_Prompts.md             ← Промпты для разработки
 ├── src/
 │   ├── moex_parser.py         ← Парсер данных MOEX
 │   ├── financial_parser.py    ← Парсер отчётности
