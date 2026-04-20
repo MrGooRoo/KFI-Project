@@ -5,7 +5,7 @@
 
 Версия: 2.0  
 Статус: ФИНАЛЬНАЯ (зафиксирована)  
-Дата: Январь 2025  
+Дата: Апрель 2026
 Репозиторий: https://github.com/MrGooRoo/KFI-Project  
 Авторы: MrGooRoo + Claude (Anthropic)  
 
