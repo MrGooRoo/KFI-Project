@@ -40,15 +40,15 @@
       ],
       "qualitative_flags": {
         "owner_group_support": false,
-        "revenue_concentration_risk": false,
-        "litigation_risk": false,
-        "affiliated_loans_risk": false,
+        "no_revenue_concentration": false,
+        "no_litigation_risk": false,
+        "no_affiliated_loans": false,
         "disclosure_delays": false,
         "market_maker_present": true,
         "organizer_reputable": true,
         "esg_controversies": false,
-        "management_changes_recent": false,
-        "auditor_qualified": false
+        "no_management_instability": false,
+        "clean_audit": false
       },
       "meta": {
         "added_date": "2026-04-18",
@@ -93,15 +93,15 @@
       ],
       "qualitative_flags": {
         "owner_group_support": true,
-        "revenue_concentration_risk": false,
-        "litigation_risk": false,
-        "affiliated_loans_risk": false,
+        "no_revenue_concentration": false,
+        "no_litigation_risk": false,
+        "no_affiliated_loans": false,
         "disclosure_delays": false,
         "market_maker_present": true,
         "organizer_reputable": true,
         "esg_controversies": false,
-        "management_changes_recent": false,
-        "auditor_qualified": true
+        "no_management_instability": false,
+        "clean_audit": true
       },
       "meta": {
         "added_date": "2026-04-18",
@@ -146,15 +146,15 @@
       ],
       "qualitative_flags": {
         "owner_group_support": false,
-        "revenue_concentration_risk": false,
-        "litigation_risk": false,
-        "affiliated_loans_risk": false,
+        "no_revenue_concentration": false,
+        "no_litigation_risk": false,
+        "no_affiliated_loans": false,
         "disclosure_delays": false,
         "market_maker_present": true,
         "organizer_reputable": true,
         "esg_controversies": false,
-        "management_changes_recent": false,
-        "auditor_qualified": true
+        "no_management_instability": false,
+        "clean_audit": true
       },
       "meta": {
         "added_date": "2026-04-18",
