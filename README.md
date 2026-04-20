@@ -32,7 +32,7 @@
 | 20–39 | Слабый | 🟠 Коралловый |
 | 0–19 | Критический | 🔴 Красный |
 
-Подробнее: [docs/methodology.md](docs/methodology.md)
+Подробнее: [docs/methodology_v2.0.md](docs/methodology_v2.0.md)
 
 ## 📁 Структура проекта
 
