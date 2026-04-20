@@ -37,6 +37,8 @@ data/
 - `profile_mfo` — МФО
 - `profile_developer` — Девелопмент
 - `profile_financial` — Финансовые посредники (факторинг, коллекторы)
+- `profile_trade` - Торговля
+- `profile_transport` - Транспорт
 
 ---
 
