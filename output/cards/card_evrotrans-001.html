@@ -3,208 +3,324 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KFI Card - ЕвроТранс</title>
+    <title>KFI • ЕвроТранс</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
-        
-        :root {
-            --kfi-color: #4f46e5;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        .title-font { font-family: 'Space Grotesk', sans-serif; }
         
         .kfi-circle {
-            background: conic-gradient(var(--kfi-color) 234.0deg, #e5e7eb 234.0deg);
+            background: conic-gradient(var(--kfi-color) calc(85.4 * 3.6deg), #27272a calc(85.4 * 3.6deg));
+            box-shadow: 0 0 0 12px #18181b,
+                        0 25px 50px -12px rgb(0 0 0 / 0.4);
         }
         
-        .category-badge {
-            background-color: #3b82f6;
-            color: white;
+        .radar-container {
+            position: relative;
+            width: 100%;
+            max-width: 240px;
+            margin: 0 auto;
         }
         
-        .block-bar {
-            height: 6px;
-            background: linear-gradient(90deg, var(--block-color) %, #e5e7eb %);
+        .flag {
+            font-size: 0.73rem;
+            padding: 5px 11px;
+            border-radius: 9999px;
+            transition: all 0.2s;
+        }
+        
+        .block-label {
+            font-size: 0.67rem;
+            line-height: 1.05;
+            color: #a3a3a3;
+            font-weight: 500;
         }
     </style>
 </head>
-<body class="bg-zinc-950 text-white font-sans">
-    <div class="max-w-md mx-auto bg-zinc-900 rounded-3xl overflow-hidden shadow-2xl border border-zinc-800">
+<body class="bg-zinc-950 text-zinc-200">
+    <div class="max-w-md mx-auto bg-zinc-900 rounded-3xl overflow-hidden shadow-2xl border border-zinc-700">
         <!-- Header -->
-        <div class="px-6 pt-6 pb-4 bg-gradient-to-br from-zinc-800 to-zinc-900">
+        <div class="px-8 pt-8 pb-6 bg-gradient-to-br from-zinc-800 to-zinc-900">
             <div class="flex justify-between items-start">
-                <div>
-                    <div class="text-emerald-400 text-xs font-medium tracking-widest">Торговля и ритейл • Группа 4</div>
-                    <h1 class="text-2xl font-semibold mt-1 leading-tight">ЕвроТранс</h1>
-                    <div class="text-zinc-400 text-sm mt-0.5">Москва</div>
+                <div class="flex-1 pr-6">
+                    <div class="inline-flex items-center gap-2 bg-zinc-800 text-emerald-400 text-xs font-medium px-3.5 py-1 rounded-3xl">
+                        Торговля и ритейл • Группа 4
+                    </div>
+                    <h1 class="title-font text-3xl font-semibold text-white mt-4 leading-none">ЕвроТранс</h1>
+                    <p class="text-zinc-400 mt-2">Москва</p>
                 </div>
-                <!-- KFI Circle -->
+                
+                <!-- KFI Circle - улучшенный в стиле Apple -->
                 <div class="relative flex-shrink-0">
-                    <div class="kfi-circle w-24 h-24 rounded-2xl flex items-center justify-center border-8 border-zinc-800 relative">
-                        <div class="text-center">
-                            <div class="text-5xl font-bold text-white">65.0</div>
-                            <div class="text-[10px] font-mono tracking-widest -mt-1 text-zinc-400">KFI</div>
+                    <div id="kfi-circle" class="kfi-circle w-28 h-28 rounded-3xl flex items-center justify-center border-[6px] border-zinc-900" 
+                         style="--kfi-color: #6366f1;">
+                        <div class="text-center relative z-10">
+                            <div class="text-6xl font-semibold text-white tracking-tighter leading-none">85.4</div>
+                            <div class="text-xs font-medium text-white/60 tracking-[1px] -mt-1">KFI</div>
                         </div>
                     </div>
-                    <div class="category-badge absolute -bottom-1 left-1/2 -translate-x-1/2 text-xs font-semibold px-4 py-0.5 rounded-3xl text-center whitespace-nowrap">
-                        Стабильный
+                    <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 px-5 py-1 text-xs font-semibold rounded-3xl border border-zinc-700 bg-zinc-900 shadow-inner text-center whitespace-nowrap"
+                         style="color: #6366f1;">
+                        Надёжный
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Blocks -->
-        <div class="p-6 space-y-6">
-            <div class="grid grid-cols-3 gap-4 text-center text-xs">
+        <div class="p-8">
+            <!-- Radar Chart (оставлен в центре, как в предыдущем шаблоне) -->
+            <div class="radar-container mb-12">
+                <canvas id="radarChart" width="240" height="240"></canvas>
+            </div>
+
+            <!-- Blocks -->
+            <div class="grid grid-cols-3 gap-6 text-center mb-12">
                 
                 <div>
-                    <div class="text-zinc-400 mb-1.5">BLOCK_A</div>
-                    <div class="h-2 bg-zinc-800 rounded-full overflow-hidden">
-                        <div class="block-bar h-full rounded-full" 
-                             style="--block-color: #22c55e; width: 68%"></div>
+                    <div class="text-xs font-semibold text-violet-400 mb-1">a</div>
+                    <div class="text-4xl font-semibold text-white">100.0</div>
+                    <div class="block-label mt-2">Платёжная устойчивость</div>
+                    <div class="h-1.5 bg-zinc-800 rounded-full mt-4 overflow-hidden">
+                        <div class="h-full bg-gradient-to-r from-violet-400 to-fuchsia-500" 
+                             style="width: 100.0%"></div>
                     </div>
-                    <div class="text-lg font-semibold mt-1">68</div>
+                    <div class="text-[10px] text-zinc-500 mt-2">Ликвидность ≥1.5 | ICR ≥2.0</div>
                 </div>
                 
                 <div>
-                    <div class="text-zinc-400 mb-1.5">BLOCK_B</div>
-                    <div class="h-2 bg-zinc-800 rounded-full overflow-hidden">
-                        <div class="block-bar h-full rounded-full" 
-                             style="--block-color: #eab308; width: 72%"></div>
+                    <div class="text-xs font-semibold text-violet-400 mb-1">b</div>
+                    <div class="text-4xl font-semibold text-white">100.0</div>
+                    <div class="block-label mt-2">Структурная устойчивость</div>
+                    <div class="h-1.5 bg-zinc-800 rounded-full mt-4 overflow-hidden">
+                        <div class="h-full bg-gradient-to-r from-violet-400 to-fuchsia-500" 
+                             style="width: 100.0%"></div>
                     </div>
-                    <div class="text-lg font-semibold mt-1">72</div>
+                    <div class="text-[10px] text-zinc-500 mt-2">Debt/EBITDA ≤3.5 | D/E ≤2.0</div>
                 </div>
                 
                 <div>
-                    <div class="text-zinc-400 mb-1.5">BLOCK_C</div>
-                    <div class="h-2 bg-zinc-800 rounded-full overflow-hidden">
-                        <div class="block-bar h-full rounded-full" 
-                             style="--block-color: #a855f7; width: 55%"></div>
+                    <div class="text-xs font-semibold text-violet-400 mb-1">c</div>
+                    <div class="text-4xl font-semibold text-white">41.2</div>
+                    <div class="block-label mt-2">Рентабельность</div>
+                    <div class="h-1.5 bg-zinc-800 rounded-full mt-4 overflow-hidden">
+                        <div class="h-full bg-gradient-to-r from-violet-400 to-fuchsia-500" 
+                             style="width: 41.2%"></div>
                     </div>
-                    <div class="text-lg font-semibold mt-1">55</div>
+                    <div class="text-[10px] text-zinc-500 mt-2">ROE ≥15% | Маржа ≥12%</div>
                 </div>
                 
                 <div>
-                    <div class="text-zinc-400 mb-1.5">BLOCK_D</div>
-                    <div class="h-2 bg-zinc-800 rounded-full overflow-hidden">
-                        <div class="block-bar h-full rounded-full" 
-                             style="--block-color: #06b6d4; width: 61%"></div>
+                    <div class="text-xs font-semibold text-violet-400 mb-1">d</div>
+                    <div class="text-4xl font-semibold text-white">100.0</div>
+                    <div class="block-label mt-2">Денежный поток</div>
+                    <div class="h-1.5 bg-zinc-800 rounded-full mt-4 overflow-hidden">
+                        <div class="h-full bg-gradient-to-r from-violet-400 to-fuchsia-500" 
+                             style="width: 100.0%"></div>
                     </div>
-                    <div class="text-lg font-semibold mt-1">61</div>
+                    <div class="text-[10px] text-zinc-500 mt-2">FCF/EBITDA ≥60%</div>
                 </div>
                 
                 <div>
-                    <div class="text-zinc-400 mb-1.5">BLOCK_E</div>
-                    <div class="h-2 bg-zinc-800 rounded-full overflow-hidden">
-                        <div class="block-bar h-full rounded-full" 
-                             style="--block-color: #ec4899; width: 78%"></div>
+                    <div class="text-xs font-semibold text-violet-400 mb-1">e</div>
+                    <div class="text-4xl font-semibold text-white">55.0</div>
+                    <div class="block-label mt-2">Облигационный профиль</div>
+                    <div class="h-1.5 bg-zinc-800 rounded-full mt-4 overflow-hidden">
+                        <div class="h-full bg-gradient-to-r from-violet-400 to-fuchsia-500" 
+                             style="width: 55.0%"></div>
                     </div>
-                    <div class="text-lg font-semibold mt-1">78</div>
+                    <div class="text-[10px] text-zinc-500 mt-2">Купон <16%, есть MM</div>
                 </div>
                 
                 <div>
-                    <div class="text-zinc-400 mb-1.5">BLOCK_F</div>
-                    <div class="h-2 bg-zinc-800 rounded-full overflow-hidden">
-                        <div class="block-bar h-full rounded-full" 
-                             style="--block-color: #8b5cf6; width: 82%"></div>
+                    <div class="text-xs font-semibold text-violet-400 mb-1">f</div>
+                    <div class="text-4xl font-semibold text-white">61.5</div>
+                    <div class="block-label mt-2">Качественная оценка</div>
+                    <div class="h-1.5 bg-zinc-800 rounded-full mt-4 overflow-hidden">
+                        <div class="h-full bg-gradient-to-r from-violet-400 to-fuchsia-500" 
+                             style="width: 61.5%"></div>
                     </div>
-                    <div class="text-lg font-semibold mt-1">82</div>
+                    <div class="text-[10px] text-zinc-500 mt-2">Нет красных флагов</div>
                 </div>
                 
             </div>
 
-            <!-- Key Insights -->
-            <div>
-                <div class="text-xs uppercase tracking-widest text-zinc-500 mb-3">Ключевые факторы</div>
+            <!-- Qualitative Flags -->
+            <div class="mb-10">
+                <div class="uppercase text-xs tracking-widest text-zinc-500 mb-4">Качественные факторы</div>
                 <div class="flex flex-wrap gap-2">
                     
-                    <span class="inline-flex items-center gap-1 text-xs px-3 py-1 rounded-2xl 
-                        bg-rose-950 text-rose-300
+                    <span class="flag cursor-pointer
+                        bg-rose-900/50 text-rose-300
                         ">
-                        Auditor Big4
+                        Аудит Big4
                     </span>
                     
-                    <span class="inline-flex items-center gap-1 text-xs px-3 py-1 rounded-2xl 
-                        bg-emerald-950 text-emerald-300
+                    <span class="flag cursor-pointer
+                        bg-emerald-900/50 text-emerald-300
                         ">
-                        Qualified Audit
+                        Квалифицированный аудит
                     </span>
                     
-                    <span class="inline-flex items-center gap-1 text-xs px-3 py-1 rounded-2xl 
-                        bg-rose-950 text-rose-300
+                    <span class="flag cursor-pointer
+                        bg-rose-900/50 text-rose-300
                         ">
-                        Related Party Risk
+                        Риск связанных сторон
                     </span>
                     
-                    <span class="inline-flex items-center gap-1 text-xs px-3 py-1 rounded-2xl 
-                        bg-emerald-950 text-emerald-300
+                    <span class="flag cursor-pointer
+                        bg-emerald-900/50 text-emerald-300
                         ">
-                        Owner Transparency
+                        Прозрачность собственников
                     </span>
                     
-                    <span class="inline-flex items-center gap-1 text-xs px-3 py-1 rounded-2xl 
-                        bg-rose-950 text-rose-300
+                    <span class="flag cursor-pointer
+                        bg-rose-900/50 text-rose-300
                         ">
-                        Litigation Risk
+                        Судебные риски
                     </span>
                     
-                    <span class="inline-flex items-center gap-1 text-xs px-3 py-1 rounded-2xl 
-                        bg-emerald-950 text-emerald-300
+                    <span class="flag cursor-pointer
+                        bg-emerald-900/50 text-emerald-300
                         ">
-                        Media Negative
+                        Негатив в СМИ
+                    </span>
+                    
+                    <span class="flag cursor-pointer
+                        bg-rose-900/50 text-rose-300
+                        ">
+                        Смена менеджмента
+                    </span>
+                    
+                    <span class="flag cursor-pointer
+                        bg-rose-900/50 text-rose-300
+                        ">
+                        Риск кросс-дефолта
+                    </span>
+                    
+                    <span class="flag cursor-pointer
+                        bg-rose-900/50 text-rose-300
+                        ">
+                        Нарушение ковенант
+                    </span>
+                    
+                    <span class="flag cursor-pointer
+                        bg-amber-900/50 text-amber-300">
+                        Качество раскрытия
                     </span>
                     
                 </div>
             </div>
 
             <!-- Bonds -->
-            <div>
-                <div class="text-xs uppercase tracking-widest text-zinc-500 mb-3">Облигации</div>
-                <div class="space-y-3">
-                    
-                    <div class="flex justify-between items-center bg-zinc-950 px-4 py-3 rounded-2xl">
-                        <div>
-                            <div class="font-medium text-sm">ЕвроТранс БО-001Р-04</div>
-                            <div class="text-zinc-500 text-xs">RU000A10BVW6</div>
-                        </div>
-                        <div class="text-right">
-                            <div class="text-emerald-400 font-semibold">21.0%</div>
-                            <div class="text-[10px] text-zinc-500">2027-10-21</div>
-                        </div>
+            <div class="mb-10">
+                <div class="uppercase text-xs tracking-widest text-zinc-500 mb-4">Действующие выпуски</div>
+                
+                <div class="flex justify-between items-center bg-zinc-950 p-4 rounded-2xl mb-3">
+                    <div class="flex-1">
+                        <div class="font-medium text-sm">ЕвроТранс БО-001Р-04</div>
+                        <div class="font-mono text-xs text-zinc-500">RU000A10BVW6</div>
                     </div>
-                    
-                    <div class="flex justify-between items-center bg-zinc-950 px-4 py-3 rounded-2xl">
-                        <div>
-                            <div class="font-medium text-sm">ЕвроТранс БО-001Р-05</div>
-                            <div class="text-zinc-500 text-xs">RU000A10A141</div>
+                    <div class="text-right">
+                        <div class="text-emerald-400 font-semibold text-xl">21.0%</div>
+                        <div class="text-xs text-zinc-400 mt-0.5">
+                            0.0 млрд ₽
                         </div>
-                        <div class="text-right">
-                            <div class="text-emerald-400 font-semibold">20.0%</div>
-                            <div class="text-[10px] text-zinc-500">2027-09-23</div>
-                        </div>
+                        <div class="text-[10px] text-zinc-500">2027-10-21</div>
                     </div>
-                    
                 </div>
+                
+                <div class="flex justify-between items-center bg-zinc-950 p-4 rounded-2xl mb-3">
+                    <div class="flex-1">
+                        <div class="font-medium text-sm">ЕвроТранс БО-001Р-05</div>
+                        <div class="font-mono text-xs text-zinc-500">RU000A10A141</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-emerald-400 font-semibold text-xl">20.0%</div>
+                        <div class="text-xs text-zinc-400 mt-0.5">
+                            0.0 млрд ₽
+                        </div>
+                        <div class="text-[10px] text-zinc-500">2027-09-23</div>
+                    </div>
+                </div>
+                
             </div>
 
-            <!-- Conclusion -->
-            <div class="bg-zinc-950 border border-zinc-800 rounded-3xl p-5 text-sm leading-relaxed">
+            <!-- Notes -->
+            <div class="bg-zinc-950 border border-zinc-800 rounded-3xl p-6 text-sm leading-relaxed text-zinc-300">
                 Публичная компания (ПАО), высокая долговая нагрузка. Активно размещался в 2023–2024. Флаг media_negative = true из-за ряда публикаций об агрессивной долговой политике. Хороший кейс для блока B и F.
             </div>
         </div>
 
-        <!-- Footer -->
-        <div class="px-6 py-4 bg-zinc-950 border-t border-zinc-800 flex items-center justify-between text-[10px] text-zinc-500">
-            <div>КФИ v2.1 • 21.04.2026</div>
-            <div class="text-rose-400">Не является инвестиционной рекомендацией</div>
+        <div class="px-8 py-6 border-t border-zinc-800 flex items-center justify-between bg-zinc-900">
+            <div class="text-xs text-zinc-500">KFI v2.1 • 2026-04-21T14:35:50.043793</div>
+            <button onclick="downloadPNG()" 
+                    class="flex items-center gap-2 bg-white text-zinc-900 font-semibold px-6 py-3 rounded-2xl text-sm hover:bg-amber-200 transition-colors">
+                ⬇️ Скачать PNG
+            </button>
         </div>
     </div>
 
     <script>
-        // Tailwind script run
-        function initialize() {
-            console.log('%cKFI Card rendered successfully', 'color:#a5b4fc; font-family:monospace');
+        function createRadarChart() {
+            const ctx = document.getElementById('radarChart');
+            const labels = ['A', 'B', 'C', 'D', 'E', 'F'];
+            const scores = [
+                100.0, 100.0, 41.2,
+                100.0, 55.0, 61.5
+            ];
+            
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: scores,
+                        backgroundColor: 'rgba(167, 139, 250, 0.12)',
+                        borderColor: '#a5b4fc',
+                        borderWidth: 2.5,
+                        pointBackgroundColor: '#c4b5fd',
+                        pointBorderColor: '#18181b',
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    }]
+                },
+                options: {
+                    plugins: { legend: { display: false }, tooltip: { displayColors: false }},
+                    scales: {
+                        r: {
+                            min: 0,
+                            max: 100,
+                            ticks: { display: false },
+                            grid: { color: '#3f3f46' },
+                            angleLines: { color: '#3f3f46' },
+                            pointLabels: {
+                                color: '#a3a3a3',
+                                font: { size: 11 },
+                                padding: 10
+                            }
+                        }
+                    }
+                }
+            });
         }
-        window.onload = initialize;
+
+        async function downloadPNG() {
+            const card = document.querySelector('.max-w-md');
+            const canvas = await html2canvas(card, { 
+                scale: 3, 
+                backgroundColor: '#18181b',
+                logging: false 
+            });
+            const link = document.createElement('a');
+            link.download = 'kfi-evrotrans-001.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        window.onload = createRadarChart;
     </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9efc14fde8d3f3a8',t:'MTc3Njc3MTI5MQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

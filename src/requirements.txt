@@ -1,4 +1,3 @@
 jinja2>=3.1.0
-# playwright для генерации PNG (опционально)
-# playwright>=1.40.0
-# pandas (для будущих парсеров)
+playwright>=1.40.0
+# Для запуска: playwright install chromium
