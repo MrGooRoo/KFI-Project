@@ -1,119 +1,125 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://raw.githubusercontent.com/MrGooRoo/KFI-Project/main/data/schema.json",
-  "title": "KFI Project Data Schema",
-  "description": "JSON Schema для валидации данных эмитентов и расчётов КФИ v2.0",
-  "version": "2.0.0",
-
+  "title": "KFI Project Data Schema v2.1",
+  "description": "JSON Schema для emitters.json и calculation results. Updated to support rich emitter metadata and full methodology v2.0",
+  "version": "2.1.0",
   "definitions": {
-
     "industry_group": {
       "type": "integer",
       "minimum": 1,
       "maximum": 7,
       "description": "Отраслевая группа: 1-Девелопмент, 2-МФО, 3-Лизинг, 4-Торговля, 5-Производство, 6-Транспорт, 7-Прочие"
     },
-
     "kfi_category": {
       "type": "string",
       "enum": ["Надёжный", "Стабильный", "Умеренный риск", "Высокий риск", "Критический"],
       "description": "Категория КФИ по шкале оценки"
     },
-
     "block_score": {
       "type": "number",
       "minimum": 0,
       "maximum": 100,
       "description": "Балл блока по шкале 0-100"
     },
-
-    "risk_flags": {
+    "qualitative_flags": {
       "type": "object",
-      "description": "Флаги риска эмитента",
+      "description": "Качественные флаги (Block F + поддержка Block E)",
       "properties": {
-        "bankruptcy_risk": {
-          "type": "boolean",
-          "description": "Иски о банкротстве или уголовные дела -> КФИ <= 30"
-        },
-        "revenue_quality_risk": {
-          "type": "boolean",
-          "description": "Рост выручки > 50% при падении CFO -> КФИ x 0.90"
-        },
-        "bond_concentration_risk": {
-          "type": "boolean",
-          "description": "Долг по облигациям > 60% финдолга -> КФИ x 0.95"
-        },
-        "data_missing": {
-          "type": "boolean",
-          "description": "3+ критических показателя отсутствуют -> КФИ x 0.90"
-        },
-        "young_issuer": {
-          "type": "boolean",
-          "description": "История менее 2 лет -> КФИ <= 50"
-        },
-        "ebitda_approximated": {
-          "type": "boolean",
-          "description": "Амортизация не выделена, EBITDA = прибыль от продаж (информационный флаг)"
-        }
+        "auditor_big4": { "type": "boolean" },
+        "qualified_audit": { "type": "boolean" },
+        "related_party_risk": { "type": "boolean" },
+        "owner_transparency": { "type": "boolean" },
+        "litigation_risk": { "type": "boolean" },
+        "media_negative": { "type": "boolean" },
+        "management_changes": { "type": "boolean" },
+        "cross_default_risk": { "type": "boolean" },
+        "covenant_breach_risk": { "type": "boolean" },
+        "disclosure_quality": { "type": "string", "enum": ["high", "standard", "minimal"] },
+        "owner_group_support": { "type": "boolean" },
+        "no_revenue_concentration": { "type": "boolean" },
+        "no_affiliated_loans": { "type": "boolean" },
+        "disclosure_delays": { "type": "boolean" },
+        "market_maker_present": { "type": "boolean" },
+        "organizer_reputable": { "type": "boolean" },
+        "esg_controversies": { "type": "boolean" },
+        "no_management_instability": { "type": "boolean" },
+        "clean_audit": { "type": "boolean" }
       },
-      "required": [
-        "bankruptcy_risk",
-        "revenue_quality_risk",
-        "bond_concentration_risk",
-        "data_missing",
-        "young_issuer",
-        "ebitda_approximated"
-      ],
-      "additionalProperties": false
+      "required": ["auditor_big4", "qualified_audit", "related_party_risk", "owner_transparency", "litigation_risk", "media_negative", "management_changes", "cross_default_risk", "covenant_breach_risk", "disclosure_quality"],
+      "additionalProperties": true
     },
-
+    "bond": {
+      "type": "object",
+      "properties": {
+        "isin": { "type": "string" },
+        "ticker": { "type": "string" },
+        "name": { "type": "string" },
+        "coupon_rate": { "type": "number" },
+        "coupon_type": { "type": "string" },
+        "coupon_frequency": { "type": "integer" },
+        "next_coupon_date": { "type": "string", "format": "date" },
+        "offer_date": { "type": ["string", "null"], "format": "date" },
+        "maturity_date": { "type": "string", "format": "date" },
+        "nominal": { "type": "integer" },
+        "issue_volume_rub": { "type": "integer" },
+        "status": { "type": "string", "enum": ["active", "redeemed", "offered"] }
+      },
+      "required": ["isin", "name", "coupon_rate", "maturity_date", "nominal", "status"]
+    },
+    "rating": {
+      "type": "object",
+      "properties": {
+        "agency": { "type": "string" },
+        "value": { "type": "string" },
+        "outlook": { "type": "string" },
+        "date": { "type": "string", "format": "date" }
+      },
+      "required": ["agency", "value", "outlook", "date"]
+    },
     "emitter": {
       "type": "object",
-      "description": "Эмитент облигаций",
+      "description": "Rich emitter profile for KFI v2.1",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Уникальный идентификатор эмитента"
-        },
-        "name": {
-          "type": "string",
-          "description": "Полное наименование эмитента"
-        },
-        "inn": {
-          "type": "string",
-          "pattern": "^[0-9]{10}$|^[0-9]{12}$",
-          "description": "ИНН эмитента (10 или 12 цифр)"
-        },
-        "industry_group": {
-          "$ref": "#/definitions/industry_group"
-        },
-        "ticker": {
-          "type": "string",
-          "description": "Тикер на MOEX (если есть)"
-        },
-        "isin": {
+        "emitter_id": { "type": "string" },
+        "name": { "type": "string" },
+        "short_name": { "type": "string" },
+        "inn": { "type": "string" },
+        "ogrn": { "type": "string" },
+        "sector": { "type": "string" },
+        "sector_code": { "type": "string" },
+        "sector_profile": { "type": "string" },
+        "industry_group": { "$ref": "#/definitions/industry_group" },
+        "region": { "type": "string" },
+        "website": { "type": "string" },
+        "e_disclosure_id": { "type": "string" },
+        "description": { "type": "string" },
+        "founded_year": { "type": "integer" },
+        "bonds": {
           "type": "array",
-          "items": { "type": "string" },
-          "description": "Список ISIN активных выпусков облигаций"
+          "items": { "$ref": "#/definitions/bond" }
         },
-        "created_at": {
-          "type": "string",
-          "format": "date",
-          "description": "Дата добавления в систему"
+        "ratings": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/rating" }
         },
-        "updated_at": {
-          "type": "string",
-          "format": "date",
-          "description": "Дата последнего обновления"
-        }
+        "qualitative_flags": { "$ref": "#/definitions/qualitative_flags" },
+        "data_sources": {
+          "type": "object",
+          "properties": {
+            "e_disclosure_url": { "type": "string", "format": "uri" },
+            "moex_url": { "type": "string", "format": "uri" }
+          }
+        },
+        "mvp_priority": { "type": "integer" },
+        "added_date": { "type": "string", "format": "date" },
+        "notes": { "type": "string" }
       },
-      "required": ["id", "name", "inn", "industry_group", "created_at", "updated_at"],
-      "additionalProperties": false
+      "required": ["emitter_id", "name", "inn", "industry_group", "sector", "description", "bonds", "qualitative_flags", "added_date"],
+      "additionalProperties": true
     },
-
     "block_scores_detail": {
       "type": "object",
-      "description": "Детальные баллы по блокам A-F",
       "properties": {
         "block_a": { "$ref": "#/definitions/block_score" },
         "block_b": { "$ref": "#/definitions/block_score" },
@@ -125,110 +131,66 @@
       "required": ["block_a", "block_b", "block_c", "block_d", "block_e", "block_f"],
       "additionalProperties": false
     },
-
+    "risk_flags": {
+      "type": "object",
+      "properties": {
+        "bankruptcy_risk": { "type": "boolean" },
+        "revenue_quality_risk": { "type": "boolean" },
+        "bond_concentration_risk": { "type": "boolean" },
+        "data_missing": { "type": "boolean" },
+        "young_issuer": { "type": "boolean" },
+        "ebitda_approximated": { "type": "boolean" }
+      },
+      "required": ["bankruptcy_risk", "revenue_quality_risk", "bond_concentration_risk", "data_missing", "young_issuer", "ebitda_approximated"],
+      "additionalProperties": false
+    },
     "calculation": {
       "type": "object",
-      "description": "Расчёт КФИ для эмитента за период",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Уникальный идентификатор расчёта"
-        },
-        "emitter_id": {
-          "type": "string",
-          "description": "Ссылка на эмитента"
-        },
-        "period": {
-          "type": "string",
-          "pattern": "^[0-9]{4}-(Q1|Q2|Q3|Q4)$",
-          "description": "Отчётный период в формате YYYY-Q# (например: 2024-Q3)"
-        },
-        "report_date": {
-          "type": "string",
-          "format": "date",
-          "description": "Дата публикации отчётности на e-disclosure"
-        },
-        "source_url": {
-          "type": "string",
-          "format": "uri",
-          "description": "Ссылка на источник отчётности"
-        },
-        "block_scores": {
-          "$ref": "#/definitions/block_scores_detail"
-        },
-        "kfi_base": {
-          "$ref": "#/definitions/block_score",
-          "description": "КФИ базовый до корректировок"
-        },
-        "kfi_final": {
-          "$ref": "#/definitions/block_score",
-          "description": "КФИ итоговый после всех корректировок"
-        },
-        "category": {
-          "$ref": "#/definitions/kfi_category"
-        },
-        "risk_flags": {
-          "$ref": "#/definitions/risk_flags"
-        },
-        "verified_by": {
-          "type": "string",
-          "description": "Кто верифицировал расчёт"
-        },
-        "verified_at": {
-          "type": ["string", "null"],
-          "format": "date",
-          "description": "Дата верификации редактором"
-        },
-        "calculated_at": {
-          "type": "string",
-          "format": "date",
-          "description": "Дата расчёта"
-        }
+        "id": { "type": "string" },
+        "emitter_id": { "type": "string" },
+        "period": { "type": "string", "pattern": "^[0-9]{4}-(Q[1-4]|FY)$" },
+        "report_date": { "type": "string", "format": "date" },
+        "block_scores": { "$ref": "#/definitions/block_scores_detail" },
+        "kfi_base": { "$ref": "#/definitions/block_score" },
+        "kfi_final": { "$ref": "#/definitions/block_score" },
+        "category": { "$ref": "#/definitions/kfi_category" },
+        "risk_flags": { "$ref": "#/definitions/risk_flags" },
+        "qualitative_adjustments": { "type": "object" },
+        "verified_by": { "type": "string" },
+        "calculated_at": { "type": "string", "format": "date-time" }
       },
-      "required": [
-        "id",
-        "emitter_id",
-        "period",
-        "report_date",
-        "block_scores",
-        "kfi_base",
-        "kfi_final",
-        "category",
-        "risk_flags",
-        "calculated_at"
-      ],
-      "additionalProperties": false
+      "required": ["id", "emitter_id", "period", "block_scores", "kfi_base", "kfi_final", "category", "risk_flags", "calculated_at"],
+      "additionalProperties": true
     }
   },
-
   "oneOf": [
     {
-      "title": "Список эмитентов (emitters.json)",
+      "title": "Emitters master database",
       "type": "object",
       "properties": {
         "$schema": { "type": "string" },
+        "version": { "type": "string" },
+        "updated": { "type": "string", "format": "date" },
         "emitters": {
           "type": "array",
           "items": { "$ref": "#/definitions/emitter" },
           "minItems": 1
         }
       },
-      "required": ["emitters"],
-      "additionalProperties": false
+      "required": ["emitters"]
     },
     {
-      "title": "Расчёт КФИ (calculations/*.json)",
+      "title": "Single or array of calculations",
       "type": "object",
       "properties": {
         "$schema": { "type": "string" },
         "calculations": {
           "type": "array",
-          "items": { "$ref": "#/definitions/calculation" },
-          "minItems": 1
+          "items": { "$ref": "#/definitions/calculation" }
         }
       },
-      "required": ["calculations"],
-      "additionalProperties": false
+      "required": ["calculations"]
     }
   ]
 }
