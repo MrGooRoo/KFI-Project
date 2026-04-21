@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KFI Card - {{ emitter.short_name or emitter.name }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        
+        :root {
+            --kfi-color: #4f46e5;
+        }
+        
+        .kfi-circle {
+            background: conic-gradient(var(--kfi-color) {{ kfi_final * 3.6 }}deg, #e5e7eb {{ kfi_final * 3.6 }}deg);
+        }
+        
+        .category-badge {
+            background-color: {{ category_color }};
+            color: white;
+        }
+        
+        .block-bar {
+            height: 6px;
+            background: linear-gradient(90deg, var(--block-color) {{ score }}%, #e5e7eb {{ score }}%);
+        }
+    </style>
+</head>
+<body class="bg-zinc-950 text-white font-sans">
+    <div class="max-w-md mx-auto bg-zinc-900 rounded-3xl overflow-hidden shadow-2xl border border-zinc-800">
+        <!-- Header -->
+        <div class="px-6 pt-6 pb-4 bg-gradient-to-br from-zinc-800 to-zinc-900">
+            <div class="flex justify-between items-start">
+                <div>
+                    <div class="text-emerald-400 text-xs font-medium tracking-widest">{{ emitter.sector }} • Группа {{ emitter.industry_group }}</div>
+                    <h1 class="text-2xl font-semibold mt-1 leading-tight">{{ emitter.short_name or emitter.name }}</h1>
+                    <div class="text-zinc-400 text-sm mt-0.5">{{ emitter.region }}</div>
+                </div>
+                <!-- KFI Circle -->
+                <div class="relative flex-shrink-0">
+                    <div class="kfi-circle w-24 h-24 rounded-2xl flex items-center justify-center border-8 border-zinc-800 relative">
+                        <div class="text-center">
+                            <div class="text-5xl font-bold text-white">{{ kfi_final }}</div>
+                            <div class="text-[10px] font-mono tracking-widest -mt-1 text-zinc-400">KFI</div>
+                        </div>
+                    </div>
+                    <div class="category-badge absolute -bottom-1 left-1/2 -translate-x-1/2 text-xs font-semibold px-4 py-0.5 rounded-3xl text-center whitespace-nowrap">
+                        {{ category }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Blocks -->
+        <div class="p-6 space-y-6">
+            <div class="grid grid-cols-3 gap-4 text-center text-xs">
+                {% for block, score in block_scores.items() %}
+                <div>
+                    <div class="text-zinc-400 mb-1.5">{{ block.upper() }}</div>
+                    <div class="h-2 bg-zinc-800 rounded-full overflow-hidden">
+                        <div class="block-bar h-full rounded-full" 
+                             style="--block-color: {{ block_colors[block] }}; width: {{ score }}%"></div>
+                    </div>
+                    <div class="text-lg font-semibold mt-1">{{ score }}</div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Key Insights -->
+            <div>
+                <div class="text-xs uppercase tracking-widest text-zinc-500 mb-3">Ключевые факторы</div>
+                <div class="flex flex-wrap gap-2">
+                    {% for flag, value in qualitative_summary.items() %}
+                    <span class="inline-flex items-center gap-1 text-xs px-3 py-1 rounded-2xl 
+                        {% if value == 'positive' %}bg-emerald-950 text-emerald-300
+                        {% elif value == 'negative' %}bg-rose-950 text-rose-300
+                        {% else %}bg-amber-950 text-amber-300{% endif %}">
+                        {{ flag }}
+                    </span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Bonds -->
+            <div>
+                <div class="text-xs uppercase tracking-widest text-zinc-500 mb-3">Облигации</div>
+                <div class="space-y-3">
+                    {% for bond in bonds %}
+                    <div class="flex justify-between items-center bg-zinc-950 px-4 py-3 rounded-2xl">
+                        <div>
+                            <div class="font-medium text-sm">{{ bond.name }}</div>
+                            <div class="text-zinc-500 text-xs">{{ bond.isin }}</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-emerald-400 font-semibold">{{ bond.coupon_rate }}%</div>
+                            <div class="text-[10px] text-zinc-500">{{ bond.maturity_date }}</div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Conclusion -->
+            <div class="bg-zinc-950 border border-zinc-800 rounded-3xl p-5 text-sm leading-relaxed">
+                {{ notes }}
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="px-6 py-4 bg-zinc-950 border-t border-zinc-800 flex items-center justify-between text-[10px] text-zinc-500">
+            <div>КФИ v2.1 • {{ calculated_at }}</div>
+            <div class="text-rose-400">Не является инвестиционной рекомендацией</div>
+        </div>
+    </div>
+
+    <script>
+        // Tailwind script run
+        function initialize() {
+            console.log('%cKFI Card rendered successfully', 'color:#a5b4fc; font-family:monospace');
+        }
+        window.onload = initialize;
+    </script>
+</body>
+</html>
