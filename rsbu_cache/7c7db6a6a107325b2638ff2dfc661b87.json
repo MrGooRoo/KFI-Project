@@ -1,0 +1,13 @@
+{
+  "inn": "7840438730",
+  "company_name": "ООО \"ЛЕГЕНДА\"",
+  "org_id": 122728,
+  "last_updated": "2026-04-21T15:42:00.227666",
+  "success": true,
+  "balance": {},
+  "opu": {},
+  "odds": {},
+  "all_extracted": {},
+  "raw_keys_sample": "Not a dict",
+  "note": "Если данных мало — структура JSON изменилась. Смотрите all_extracted и raw_keys_sample"
+}
