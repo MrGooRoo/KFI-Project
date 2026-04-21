@@ -1,542 +1,586 @@
 {
   "$schema": "https://raw.githubusercontent.com/MrGooRoo/KFI-Project/main/data/schema.json",
-  "version": "2.0",
-  "updated": "2026-04-18",
+  "version": "2.1",
+  "updated": "2025-04-22",
   "emitters": [
     {
       "emitter_id": "CARMONEY",
       "name": "ООО «Кармани»",
+      "short_name": "Кармани",
       "inn": "9715291160",
+      "ogrn": "",
       "sector": "МФО",
+      "sector_code": "mfo",
       "sector_profile": "profile_mfo",
-      "description": "Микрофинансовая организация, специализируется на займах под залог автомобиля",
-      "founded_year": 2013,
+      "industry_group": 2,
       "region": "Москва",
       "website": "https://carmoney.ru",
-      "sources": {
-        "e_disclosure_id": "carmoney",
-        "moex_emitter_id": null,
-        "rating_agency": "Эксперт РА",
-        "rating_value": "ruBB+",
-        "rating_outlook": "Стабильный",
-        "rating_date": "2025-09-01"
-      },
+      "e_disclosure_id": "carmoney",
+      "description": "Микрофинансовая организация, специализируется на займах под залог автомобиля. Тестовый эмитент для отладки методологии МФО-профиля.",
       "bonds": [
         {
           "isin": "RU000A105FS4",
           "ticker": "CARM001",
-          "board_id": "TQCB",
           "name": "Кармани БО-01",
           "coupon_rate": 15.5,
           "coupon_type": "Фиксированный",
           "coupon_frequency": 12,
-          "next_coupon_date": "2026-05-15",
-          "offer_date": null,
           "maturity_date": "2027-04-15",
+          "nominal": 1000,
           "issue_volume_rub": 500000000,
-          "face_value": 1000,
-          "currency": "RUB"
+          "status": "active"
+        }
+      ],
+      "ratings": [
+        {
+          "agency": "Эксперт РА",
+          "value": "ruBB+",
+          "outlook": "Стабильный",
+          "date": "2025-09-01"
         }
       ],
       "qualitative_flags": {
+        "auditor_big4": false,
+        "qualified_audit": true,
+        "related_party_risk": false,
+        "owner_transparency": true,
+        "litigation_risk": false,
+        "media_negative": false,
+        "management_changes": false,
+        "cross_default_risk": false,
+        "covenant_breach_risk": false,
+        "disclosure_quality": "standard",
         "owner_group_support": false,
         "no_revenue_concentration": false,
-        "no_litigation_risk": false,
         "no_affiliated_loans": false,
         "disclosure_delays": false,
         "market_maker_present": true,
         "organizer_reputable": true,
         "esg_controversies": false,
-        "no_management_instability": false,
+        "no_management_instability": true,
         "clean_audit": false
       },
-      "meta": {
-        "added_date": "2026-04-18",
-        "last_updated": "2026-04-18",
-        "analyst_notes": "Тестовый эмитент для отладки методологии. МФО-профиль."
-      }
+      "data_sources": {
+        "e_disclosure_url": "https://www.e-disclosure.ru/portal/company.aspx?id=carmoney",
+        "moex_url": "https://www.moex.com/ru/issue.aspx?board=TQCB&code=RU000A105FS4"
+      },
+      "mvp_priority": 1,
+      "added_date": "2025-04-18",
+      "notes": "Тестовый эмитент для отладки методологии. МФО-профиль с фокусом на автозалог. Важный кейс для блока A (нормативы ЦБ для МФО) и блока D (качество портфеля)."
     },
     {
       "emitter_id": "GTLK",
       "name": "ООО «ГТЛК» (ГТЛК)",
+      "short_name": "ГТЛК",
       "inn": "7720284983",
+      "ogrn": "",
       "sector": "Лизинг",
+      "sector_code": "leasing",
       "sector_profile": "profile_leasing",
-      "description": "Государственная транспортная лизинговая компания",
-      "founded_year": 2001,
+      "industry_group": 3,
       "region": "Москва",
       "website": "https://gtlk.ru",
-      "sources": {
-        "e_disclosure_id": "gtlk",
-        "moex_emitter_id": null,
-        "rating_agency": "АКРА",
-        "rating_value": "A+(RU)",
-        "rating_outlook": "Стабильный",
-        "rating_date": "2025-11-01"
-      },
+      "e_disclosure_id": "gtlk",
+      "description": "Государственная транспортная лизинговая компания. Крупнейший лизингодатель с государственным участием.",
       "bonds": [
         {
           "isin": "RU000A102SG8",
           "ticker": "GTLK001",
-          "board_id": "TQCB",
           "name": "ГТЛК БО-001P-15",
           "coupon_rate": 9.7,
           "coupon_type": "Фиксированный",
           "coupon_frequency": 2,
-          "next_coupon_date": "2026-06-01",
-          "offer_date": null,
           "maturity_date": "2029-12-01",
+          "nominal": 1000,
           "issue_volume_rub": 10000000000,
-          "face_value": 1000,
-          "currency": "RUB"
+          "status": "active"
+        }
+      ],
+      "ratings": [
+        {
+          "agency": "АКРА",
+          "value": "A+(RU)",
+          "outlook": "Стабильный",
+          "date": "2025-11-01"
         }
       ],
       "qualitative_flags": {
+        "auditor_big4": true,
+        "qualified_audit": true,
+        "related_party_risk": false,
+        "owner_transparency": true,
+        "litigation_risk": false,
+        "media_negative": false,
+        "management_changes": false,
+        "cross_default_risk": false,
+        "covenant_breach_risk": false,
+        "disclosure_quality": "high",
         "owner_group_support": true,
-        "no_revenue_concentration": false,
-        "no_litigation_risk": false,
-        "no_affiliated_loans": false,
+        "no_revenue_concentration": true,
+        "no_affiliated_loans": true,
         "disclosure_delays": false,
         "market_maker_present": true,
         "organizer_reputable": true,
         "esg_controversies": false,
-        "no_management_instability": false,
+        "no_management_instability": true,
         "clean_audit": true
       },
-      "meta": {
-        "added_date": "2026-04-18",
-        "last_updated": "2026-04-18",
-        "analyst_notes": "Тестовый эмитент. Лизинговый профиль, государственное участие."
-      }
+      "data_sources": {
+        "e_disclosure_url": "https://www.e-disclosure.ru/portal/company.aspx?id=gtlk",
+        "moex_url": "https://www.moex.com/ru/issue.aspx?board=TQCB&code=RU000A102SG8"
+      },
+      "mvp_priority": 1,
+      "added_date": "2025-04-18",
+      "notes": "Тестовый эмитент. Лизинговый профиль с государственным участием (высокий owner_group_support). Важный кейс для блока B (высокий леверидж - норма для лизинга) и блока F."
     },
     {
-      "emitter_id": "SELTL",
+      "emitter_id": "SETL",
       "name": "ООО «Сэтл Групп»",
+      "short_name": "Сэтл Групп",
       "inn": "7840395960",
+      "ogrn": "",
       "sector": "Девелопмент",
+      "sector_code": "developer",
       "sector_profile": "profile_developer",
-      "description": "Девелопер жилой недвижимости, Санкт-Петербург и регионы",
-      "founded_year": 1994,
+      "industry_group": 1,
       "region": "Санкт-Петербург",
       "website": "https://setl-group.ru",
-      "sources": {
-        "e_disclosure_id": "setlgroup",
-        "moex_emitter_id": null,
-        "rating_agency": "АКРА",
-        "rating_value": "A(RU)",
-        "rating_outlook": "Стабильный",
-        "rating_date": "2025-08-15"
-      },
+      "e_disclosure_id": "setlgroup",
+      "description": "Девелопер жилой недвижимости, Санкт-Петербург и регионы. Крупный игрок в сегменте комфорт и бизнес-класс.",
       "bonds": [
         {
           "isin": "RU000A107U95",
           "ticker": "SETL001",
-          "board_id": "TQCB",
           "name": "Сэтл Групп БО-П01",
           "coupon_rate": 13.5,
           "coupon_type": "Фиксированный",
           "coupon_frequency": 4,
-          "next_coupon_date": "2026-07-01",
-          "offer_date": "2027-07-01",
           "maturity_date": "2029-07-01",
+          "offer_date": "2027-07-01",
+          "nominal": 1000,
           "issue_volume_rub": 5000000000,
-          "face_value": 1000,
-          "currency": "RUB"
+          "status": "active"
+        }
+      ],
+      "ratings": [
+        {
+          "agency": "АКРА",
+          "value": "A(RU)",
+          "outlook": "Стабильный",
+          "date": "2025-08-15"
         }
       ],
       "qualitative_flags": {
+        "auditor_big4": false,
+        "qualified_audit": true,
+        "related_party_risk": false,
+        "owner_transparency": true,
+        "litigation_risk": false,
+        "media_negative": false,
+        "management_changes": false,
+        "cross_default_risk": false,
+        "covenant_breach_risk": false,
+        "disclosure_quality": "standard",
         "owner_group_support": false,
         "no_revenue_concentration": false,
-        "no_litigation_risk": false,
         "no_affiliated_loans": false,
         "disclosure_delays": false,
         "market_maker_present": true,
         "organizer_reputable": true,
         "esg_controversies": false,
-        "no_management_instability": false,
+        "no_management_instability": true,
         "clean_audit": true
       },
-      "meta": {
-        "added_date": "2026-04-18",
-        "last_updated": "2026-04-18",
-        "analyst_notes": "Тестовый эмитент. Девелоперский профиль, длинный операционный цикл."
-      }
+      "data_sources": {
+        "e_disclosure_url": "https://www.e-disclosure.ru/portal/company.aspx?id=setlgroup",
+        "moex_url": "https://www.moex.com/ru/issue.aspx?board=TQCB&code=RU000A107U95"
+      },
+      "mvp_priority": 1,
+      "added_date": "2025-04-18",
+      "notes": "Тестовый эмитент. Девелоперский профиль с длинным операционным циклом. Контраст с более мелкими девелоперами (Legenda). Важно для тестирования блока A/B с учетом эскроу-счетов."
+    },
+    {
+      "emitter_id": "legenda-001",
+      "name": "ООО «ЛЕГЕНДА»",
+      "short_name": "Легенда",
+      "inn": "7840438730",
+      "ogrn": "1117847484861",
+      "sector": "Девелопмент и строительство",
+      "sector_code": "developer",
+      "sector_profile": "residential_developer",
+      "industry_group": 1,
+      "region": "Санкт-Петербург",
+      "website": "https://legend-development.ru",
+      "e_disclosure_id": "37392",
+      "description": "Региональный застройщик жилой недвижимости в Санкт-Петербурге и ЛО. Специализируется на комфорт и бизнес-классе.",
+      "bonds": [
+        {
+          "isin": "RU000A1067H4",
+          "name": "Легенда БО-001P-02",
+          "coupon_rate": 16.0,
+          "maturity_date": "2026-10-07",
+          "nominal": 1000,
+          "status": "active"
+        }
+      ],
+      "ratings": [],
+      "qualitative_flags": {
+        "auditor_big4": false,
+        "qualified_audit": true,
+        "related_party_risk": false,
+        "owner_transparency": true,
+        "litigation_risk": false,
+        "media_negative": false,
+        "management_changes": false,
+        "cross_default_risk": false,
+        "covenant_breach_risk": false,
+        "disclosure_quality": "standard"
+      },
+      "data_sources": {
+        "e_disclosure_url": "https://www.e-disclosure.ru/portal/company.aspx?id=37392",
+        "moex_url": "https://www.moex.com/ru/issue.aspx?board=TQCB&code=RU000A1067H4"
+      },
+      "mvp_priority": 1,
+      "added_date": "2025-04-21",
+      "notes": "Контраст с Сэтл Групп — средний региональный девелопер, выше риск. Важный кейс для тестирования девелоперской специфики (эскроу, проектное финансирование)."
+    },
+    {
+      "emitter_id": "pkb-001",
+      "name": "НАО «Профессиональная коллекторская организация «Первое клиентское бюро»»",
+      "short_name": "ПКБ",
+      "inn": "2723115222",
+      "ogrn": "1102723003188",
+      "sector": "МФО и потребительское кредитование",
+      "sector_code": "mfo",
+      "sector_profile": "debt_collector",
+      "industry_group": 2,
+      "region": "Москва",
+      "website": "https://pkbonline.ru",
+      "e_disclosure_id": "32831",
+      "description": "Крупнейшая профессиональная коллекторская организация России. Покупает портфели просроченных долгов у банков и МФО.",
+      "bonds": [
+        {
+          "isin": "RU000A10BGU1",
+          "name": "ПКБ 001Р-07",
+          "coupon_rate": 24.0,
+          "maturity_date": "2027-03-17",
+          "nominal": 1000,
+          "status": "active"
+        },
+        {
+          "isin": "RU000A108U72",
+          "name": "ПКБ 001Р-05",
+          "coupon_rate": 19.5,
+          "maturity_date": "2027-06-24",
+          "nominal": 1000,
+          "status": "active"
+        }
+      ],
+      "ratings": [
+        {
+          "agency": "Эксперт РА",
+          "value": "ruBBB",
+          "outlook": "stable",
+          "date": "2024-01-01"
+        }
+      ],
+      "qualitative_flags": {
+        "auditor_big4": false,
+        "qualified_audit": true,
+        "related_party_risk": false,
+        "owner_transparency": true,
+        "litigation_risk": false,
+        "media_negative": false,
+        "management_changes": false,
+        "cross_default_risk": false,
+        "covenant_breach_risk": false,
+        "disclosure_quality": "standard"
+      },
+      "data_sources": {
+        "e_disclosure_url": "https://www.e-disclosure.ru/portal/company.aspx?id=32831",
+        "moex_url": "https://www.moex.com/ru/issue.aspx?board=TQCB&code=RU000A10BGU1"
+      },
+      "mvp_priority": 1,
+      "added_date": "2025-04-21",
+      "notes": "Коллекторская специфика — нет выручки как таковой, основной доход от покупки и взыскания долгов. Группа МФО с особым профилем. Важно для тестирования блока C и D (качество долгового портфеля)."
+    },
+    {
+      "emitter_id": "evrotrans-001",
+      "name": "ПАО «ЕвроТранс»",
+      "short_name": "ЕвроТранс",
+      "inn": "5029169023",
+      "ogrn": "1025001843440",
+      "sector": "Торговля и ритейл",
+      "sector_code": "retail",
+      "sector_profile": "fuel_retail",
+      "industry_group": 4,
+      "region": "Москва",
+      "website": "https://eurotrans.ru",
+      "e_disclosure_id": "18500",
+      "description": "Сеть АЗС «ТРАССА» в Московском регионе. Топливный ритейлер с собственными заправочными станциями и кафе.",
+      "bonds": [
+        {
+          "isin": "RU000A10BVW6",
+          "name": "ЕвроТранс БО-001Р-04",
+          "coupon_rate": 21.0,
+          "maturity_date": "2027-10-21",
+          "nominal": 1000,
+          "status": "active"
+        },
+        {
+          "isin": "RU000A10A141",
+          "name": "ЕвроТранс БО-001Р-05",
+          "coupon_rate": 20.0,
+          "maturity_date": "2027-09-23",
+          "nominal": 1000,
+          "status": "active"
+        }
+      ],
+      "ratings": [
+        {
+          "agency": "АКРА",
+          "value": "BBB+(RU)",
+          "outlook": "stable",
+          "date": "2024-06-01"
+        }
+      ],
+      "qualitative_flags": {
+        "auditor_big4": false,
+        "qualified_audit": true,
+        "related_party_risk": false,
+        "owner_transparency": true,
+        "litigation_risk": false,
+        "media_negative": true,
+        "management_changes": false,
+        "cross_default_risk": false,
+        "covenant_breach_risk": false,
+        "disclosure_quality": "standard"
+      },
+      "data_sources": {
+        "e_disclosure_url": "https://www.e-disclosure.ru/portal/company.aspx?id=18500",
+        "moex_url": "https://www.moex.com/ru/issue.aspx?board=TQOD&code=RU000A10BVW6"
+      },
+      "mvp_priority": 1,
+      "added_date": "2025-04-21",
+      "notes": "Публичная компания (ПАО), высокая долговая нагрузка. Активно размещался в 2023–2024. Флаг media_negative = true из-за ряда публикаций об агрессивной долговой политике. Хороший кейс для блока B и F."
+    },
+    {
+      "emitter_id": "naftatrans-001",
+      "name": "ООО «Топливная компания «Нафтатранс плюс»»",
+      "short_name": "Нафтатранс Плюс",
+      "inn": "5404345962",
+      "ogrn": "1115476032400",
+      "sector": "Торговля и ритейл",
+      "sector_code": "retail",
+      "sector_profile": "fuel_retail",
+      "industry_group": 4,
+      "region": "Новосибирск",
+      "website": "https://naftatrans.ru",
+      "e_disclosure_id": "38742",
+      "description": "Региональная сеть АЗС в Сибирском федеральном округе. Оптово-розничная торговля нефтепродуктами.",
+      "bonds": [
+        {
+          "isin": "RU000A106Y21",
+          "name": "Нафтатранс Плюс БО-04",
+          "coupon_rate": 15.5,
+          "maturity_date": "2026-06-09",
+          "nominal": 1000,
+          "status": "active"
+        },
+        {
+          "isin": "RU000A102V51",
+          "name": "Нафтатранс Плюс БО-02",
+          "coupon_rate": 13.0,
+          "maturity_date": "2025-03-26",
+          "nominal": 1000,
+          "status": "redeemed"
+        }
+      ],
+      "ratings": [],
+      "qualitative_flags": {
+        "auditor_big4": false,
+        "qualified_audit": true,
+        "related_party_risk": true,
+        "owner_transparency": false,
+        "litigation_risk": false,
+        "media_negative": false,
+        "management_changes": false,
+        "cross_default_risk": false,
+        "covenant_breach_risk": false,
+        "disclosure_quality": "minimal"
+      },
+      "data_sources": {
+        "e_disclosure_url": "https://www.e-disclosure.ru/portal/company.aspx?id=38742",
+        "moex_url": "https://www.moex.com/ru/issue.aspx?board=TQRD&code=RU000A106Y21"
+      },
+      "mvp_priority": 1,
+      "added_date": "2025-04-21",
+      "notes": "Пара к ЕвроТрансу. Региональный малый ритейлер без рейтинга. related_party_risk и owner_transparency = false — повод для снижения в блоке F. Типичный малый ВДО."
+    },
+    {
+      "emitter_id": "myasnichiy-001",
+      "name": "ООО «Торговый дом «Мясничий»»",
+      "short_name": "Мясничий",
+      "inn": "2462232112",
+      "ogrn": "1142468041737",
+      "sector": "Производство и промышленность",
+      "sector_code": "manufacturing",
+      "sector_profile": "food_production",
+      "industry_group": 5,
+      "region": "Красноярск",
+      "website": "",
+      "e_disclosure_id": "37422",
+      "description": "Производитель и ритейлер мясной продукции в Красноярском крае. Вертикально интегрированная структура: собственное производство + розница.",
+      "bonds": [
+        {
+          "isin": "RU000A105CF8",
+          "name": "Мясничий БО-4",
+          "coupon_rate": 15.0,
+          "maturity_date": "2025-12-11",
+          "nominal": 1000,
+          "status": "active"
+        }
+      ],
+      "ratings": [],
+      "qualitative_flags": {
+        "auditor_big4": false,
+        "qualified_audit": false,
+        "related_party_risk": true,
+        "owner_transparency": false,
+        "litigation_risk": false,
+        "media_negative": false,
+        "management_changes": false,
+        "cross_default_risk": false,
+        "covenant_breach_risk": false,
+        "disclosure_quality": "minimal"
+      },
+      "data_sources": {
+        "e_disclosure_url": "https://www.e-disclosure.ru/portal/company.aspx?id=37422",
+        "moex_url": "https://www.moex.com/ru/listing/securities-cards.aspx?code=RU000A105CF8"
+      },
+      "mvp_priority": 1,
+      "added_date": "2025-04-21",
+      "notes": "Типичный малый ВДО-эмитент без рейтинга и без аудитора из ТОП-50. Важный кейс для тестирования нижней части шкалы КФИ и блока F (низкая прозрачность)."
+    },
+    {
+      "emitter_id": "delo-001",
+      "name": "АО «Группа компаний «Дело»»",
+      "short_name": "ГК Дело",
+      "inn": "7705872645",
+      "ogrn": "1107746225485",
+      "sector": "Транспорт и логистика",
+      "sector_code": "transport",
+      "sector_profile": "port_logistics",
+      "industry_group": 6,
+      "region": "Москва",
+      "website": "https://delo-group.ru",
+      "e_disclosure_id": "35812",
+      "description": "Крупнейший частный портовый и логистический оператор России. Управляет стивидорными активами (НУТЭП, КСК), контейнерными терминалами и железнодорожным оператором «Рускон».",
+      "bonds": [
+        {
+          "isin": "RU000A101QK2",
+          "name": "ГК Дело БО-001P-01",
+          "coupon_rate": 9.45,
+          "maturity_date": "2025-11-12",
+          "nominal": 1000,
+          "status": "active"
+        },
+        {
+          "isin": "RU000A103Y93",
+          "name": "ГК Дело БО-001P-02",
+          "coupon_rate": 12.0,
+          "maturity_date": "2026-10-01",
+          "nominal": 1000,
+          "status": "active"
+        }
+      ],
+      "ratings": [
+        {
+          "agency": "АКРА",
+          "value": "AA-(RU)",
+          "outlook": "stable",
+          "date": "2024-05-01"
+        }
+      ],
+      "qualitative_flags": {
+        "auditor_big4": true,
+        "qualified_audit": true,
+        "related_party_risk": false,
+        "owner_transparency": true,
+        "litigation_risk": false,
+        "media_negative": false,
+        "management_changes": false,
+        "cross_default_risk": false,
+        "covenant_breach_risk": false,
+        "disclosure_quality": "high"
+      },
+      "data_sources": {
+        "e_disclosure_url": "https://www.e-disclosure.ru/portal/company.aspx?id=35812",
+        "moex_url": "https://www.moex.com/ru/issue.aspx?board=TQCB&code=RU000A101QK2"
+      },
+      "mvp_priority": 1,
+      "added_date": "2025-04-21",
+      "notes": "Крупный эмитент инвестиционного уровня. Важен как якорный пример группы 6 (транспорт). Высокий CAPEX на портовую инфраструктуру. Высокие показатели по качественным флагам."
+    },
+    {
+      "emitter_id": "whoosh-001",
+      "name": "ООО «ВУШ»",
+      "short_name": "Whoosh",
+      "inn": "7710475090",
+      "ogrn": "1187746671840",
+      "sector": "Прочие и диверсифицированные",
+      "sector_code": "other",
+      "sector_profile": "technology_sharing",
+      "industry_group": 7,
+      "region": "Москва",
+      "website": "https://whoosh.bike",
+      "e_disclosure_id": "45920",
+      "description": "Крупнейший оператор шеринга электросамокатов в России. Технологическая платформа + собственный флот СИМ. Наличие акционерного капитала (материнская компания ВУШ Холдинг торгуется на MOEX).",
+      "bonds": [
+        {
+          "isin": "RU000A106HB4",
+          "name": "Whoosh выпуск 2",
+          "coupon_rate": 14.5,
+          "maturity_date": "2026-07-24",
+          "nominal": 1000,
+          "status": "active"
+        },
+        {
+          "isin": "RU000A10BS76",
+          "name": "Whoosh выпуск 4",
+          "coupon_rate": 20.25,
+          "maturity_date": "2028-06-06",
+          "nominal": 1000,
+          "status": "active"
+        }
+      ],
+      "ratings": [
+        {
+          "agency": "АКРА",
+          "value": "A-(RU)",
+          "outlook": "stable",
+          "date": "2024-09-01"
+        }
+      ],
+      "qualitative_flags": {
+        "auditor_big4": true,
+        "qualified_audit": true,
+        "related_party_risk": false,
+        "owner_transparency": true,
+        "litigation_risk": false,
+        "media_negative": false,
+        "management_changes": false,
+        "cross_default_risk": false,
+        "covenant_breach_risk": false,
+        "disclosure_quality": "high"
+      },
+      "data_sources": {
+        "e_disclosure_url": "https://www.e-disclosure.ru/portal/company.aspx?id=45920",
+        "moex_url": "https://www.moex.com/ru/issue.aspx?board=TQCB&code=RU000A106HB4"
+      },
+      "mvp_priority": 1,
+      "added_date": "2025-04-21",
+      "notes": "Технологический эмитент — нестандартный для ВДО. Растущий FCF-отрицательный бизнес. Важен для тестирования блока D (денежный поток) и группы 7 (прочие)."
     }
-  ],
-  {
-    "emitter_id": "legenda-001",
-    "name": "ООО «ЛЕГЕНДА»",
-    "short_name": "Легенда",
-    "inn": "7840438730",
-    "ogrn": "1117847484861",
-    "sector": "Девелопмент и строительство",
-    "sector_code": "developer",
-    "sector_profile": "residential_developer",
-    "region": "Санкт-Петербург",
-    "website": "https://legend-development.ru",
-    "e_disclosure_id": "37392",
-    "description": "Региональный застройщик жилой недвижимости в Санкт-Петербурге и ЛО. Специализируется на комфорт и бизнес-классе.",
-    "bonds": [
-      {
-        "isin": "RU000A1067H4",
-        "name": "Легенда БО-001P-02",
-        "coupon_rate": 16.0,
-        "maturity_date": "2026-10-07",
-        "nominal": 1000,
-        "status": "active"
-      }
-    ],
-    "ratings": [],
-    "qualitative_flags": {
-      "auditor_big4": false,
-      "qualified_audit": true,
-      "related_party_risk": false,
-      "owner_transparency": true,
-      "litigation_risk": false,
-      "media_negative": false,
-      "management_changes": false,
-      "cross_default_risk": false,
-      "covenant_breach_risk": false,
-      "disclosure_quality": "standard"
-    },
-    "data_sources": {
-      "e_disclosure_url": "https://www.e-disclosure.ru/portal/company.aspx?id=37392",
-      "moex_url": "https://www.moex.com/ru/issue.aspx?board=TQCB&code=RU000A1067H4"
-    },
-    "mvp_priority": 1,
-    "added_date": "2026-04-21",
-    "notes": "Контраст с Сэтл Групп — средний региональный девелопер, выше риск"
-  },
-  {
-    "emitter_id": "pkb-001",
-    "name": "НАО «Профессиональная коллекторская организация «Первое клиентское бюро»»",
-    "short_name": "ПКБ",
-    "inn": "2723115222",
-    "ogrn": "1102723003188",
-    "sector": "МФО и потребительское кредитование",
-    "sector_code": "mfo",
-    "sector_profile": "debt_collector",
-    "region": "Москва",
-    "website": "https://pkbonline.ru",
-    "e_disclosure_id": "32831",
-    "description": "Крупнейшая профессиональная коллекторская организация России. Покупает портфели просроченных долгов у банков и МФО.",
-    "bonds": [
-      {
-        "isin": "RU000A10BGU1",
-        "name": "ПКБ 001Р-07",
-        "coupon_rate": 24.0,
-        "maturity_date": "2027-03-17",
-        "nominal": 1000,
-        "status": "active"
-      },
-      {
-        "isin": "RU000A108U72",
-        "name": "ПКБ 001Р-05",
-        "coupon_rate": 19.5,
-        "maturity_date": "2027-06-24",
-        "nominal": 1000,
-        "status": "active"
-      }
-    ],
-    "ratings": [
-      {
-        "agency": "Эксперт РА",
-        "value": "ruBBB",
-        "outlook": "stable",
-        "date": "2024-01-01"
-      }
-    ],
-    "qualitative_flags": {
-      "auditor_big4": false,
-      "qualified_audit": true,
-      "related_party_risk": false,
-      "owner_transparency": true,
-      "litigation_risk": false,
-      "media_negative": false,
-      "management_changes": false,
-      "cross_default_risk": false,
-      "covenant_breach_risk": false,
-      "disclosure_quality": "standard"
-    },
-    "data_sources": {
-      "e_disclosure_url": "https://www.e-disclosure.ru/portal/company.aspx?id=32831",
-      "moex_url": "https://www.moex.com/ru/issue.aspx?board=TQCB&code=RU000A10BGU1"
-    },
-    "mvp_priority": 1,
-    "added_date": "2026-04-21",
-    "notes": "Коллекторская специфика — нет выручки как таковой, основной доход от покупки и взыскания долгов. Группа МФО с особым профилем"
-  },
-  {
-    "emitter_id": "evrotrans-001",
-    "name": "ПАО «ЕвроТранс»",
-    "short_name": "ЕвроТранс",
-    "inn": "5029169023",
-    "ogrn": "1025001843440",
-    "sector": "Торговля и ритейл",
-    "sector_code": "retail",
-    "sector_profile": "fuel_retail",
-    "region": "Москва",
-    "website": "https://eurotrans.ru",
-    "e_disclosure_id": "18500",
-    "description": "Сеть АЗС «ТРАССА» в Московском регионе. Топливный ритейлер с собственными заправочными станциями и кафе.",
-    "bonds": [
-      {
-        "isin": "RU000A10BVW6",
-        "name": "ЕвроТранс БО-001Р-04",
-        "coupon_rate": 21.0,
-        "maturity_date": "2027-10-21",
-        "nominal": 1000,
-        "status": "active"
-      },
-      {
-        "isin": "RU000A10A141",
-        "name": "ЕвроТранс БО-001Р-05",
-        "coupon_rate": 20.0,
-        "maturity_date": "2027-09-23",
-        "nominal": 1000,
-        "status": "active"
-      }
-    ],
-    "ratings": [
-      {
-        "agency": "АКРА",
-        "value": "BBB+(RU)",
-        "outlook": "stable",
-        "date": "2024-06-01"
-      }
-    ],
-    "qualitative_flags": {
-      "auditor_big4": false,
-      "qualified_audit": true,
-      "related_party_risk": false,
-      "owner_transparency": true,
-      "litigation_risk": false,
-      "media_negative": true,
-      "management_changes": false,
-      "cross_default_risk": false,
-      "covenant_breach_risk": false,
-      "disclosure_quality": "standard"
-    },
-    "data_sources": {
-      "e_disclosure_url": "https://www.e-disclosure.ru/portal/company.aspx?id=18500",
-      "moex_url": "https://www.moex.com/ru/issue.aspx?board=TQOD&code=RU000A10BVW6"
-    },
-    "mvp_priority": 1,
-    "added_date": "2026-04-21",
-    "notes": "Публичная компания (ПАО), высокая долговая нагрузка. Активно размещался в 2023–2024. Флаг media_negative = true из-за ряда публикаций об агрессивной долговой политике"
-  },
-  {
-    "emitter_id": "naftатrans-001",
-    "name": "ООО «Топливная компания «Нафтатранс плюс»»",
-    "short_name": "Нафтатранс Плюс",
-    "inn": "5404345962",
-    "ogrn": "1115476032400",
-    "sector": "Торговля и ритейл",
-    "sector_code": "retail",
-    "sector_profile": "fuel_retail",
-    "region": "Новосибирск",
-    "website": "https://naftатrans.ru",
-    "e_disclosure_id": "38742",
-    "description": "Региональная сеть АЗС в Сибирском федеральном округе. Оптово-розничная торговля нефтепродуктами.",
-    "bonds": [
-      {
-        "isin": "RU000A106Y21",
-        "name": "Нафтатранс Плюс БО-04",
-        "coupon_rate": 15.5,
-        "maturity_date": "2026-06-09",
-        "nominal": 1000,
-        "status": "active"
-      },
-      {
-        "isin": "RU000A102V51",
-        "name": "Нафтатранс Плюс БО-02",
-        "coupon_rate": 13.0,
-        "maturity_date": "2025-03-26",
-        "nominal": 1000,
-        "status": "redeemed"
-      }
-    ],
-    "ratings": [],
-    "qualitative_flags": {
-      "auditor_big4": false,
-      "qualified_audit": true,
-      "related_party_risk": true,
-      "owner_transparency": false,
-      "litigation_risk": false,
-      "media_negative": false,
-      "management_changes": false,
-      "cross_default_risk": false,
-      "covenant_breach_risk": false,
-      "disclosure_quality": "minimal"
-    },
-    "data_sources": {
-      "e_disclosure_url": "https://www.e-disclosure.ru/portal/company.aspx?id=38742",
-      "moex_url": "https://www.moex.com/ru/issue.aspx?board=TQRD&code=RU000A106Y21"
-    },
-    "mvp_priority": 1,
-    "added_date": "2026-04-21",
-    "notes": "Пара к ЕвроТрансу. Региональный малый ритейлер без рейтинга. related_party_risk и owner_transparency = false — повод для снижения в блоке F"
-  },
-  {
-    "emitter_id": "myasnichiy-001",
-    "name": "ООО «Торговый дом «Мясничий»»",
-    "short_name": "Мясничий",
-    "inn": "2462232112",
-    "ogrn": "1142468041737",
-    "sector": "Производство и промышленность",
-    "sector_code": "manufacturing",
-    "sector_profile": "food_production",
-    "region": "Красноярск",
-    "website": "",
-    "e_disclosure_id": "37422",
-    "description": "Производитель и ритейлер мясной продукции в Красноярском крае. Вертикально интегрированная структура: собственное производство + розница.",
-    "bonds": [
-      {
-        "isin": "RU000A105CF8",
-        "name": "Мясничий БО-4",
-        "coupon_rate": 15.0,
-        "maturity_date": "2025-12-11",
-        "nominal": 1000,
-        "status": "active"
-      }
-    ],
-    "ratings": [],
-    "qualitative_flags": {
-      "auditor_big4": false,
-      "qualified_audit": false,
-      "related_party_risk": true,
-      "owner_transparency": false,
-      "litigation_risk": false,
-      "media_negative": false,
-      "management_changes": false,
-      "cross_default_risk": false,
-      "covenant_breach_risk": false,
-      "disclosure_quality": "minimal"
-    },
-    "data_sources": {
-      "e_disclosure_url": "https://www.e-disclosure.ru/portal/company.aspx?id=37422",
-      "moex_url": "https://www.moex.com/ru/listing/securities-cards.aspx?code=RU000A105CF8"
-    },
-    "mvp_priority": 1,
-    "added_date": "2026-04-21",
-    "notes": "Типичный малый ВДО-эмитент без рейтинга и без аудитора из ТОП-50. Важный кейс для тестирования нижней части шкалы КФИ"
-  },
-  {
-    "emitter_id": "delo-001",
-    "name": "АО «Группа компаний «Дело»»",
-    "short_name": "ГК Дело",
-    "inn": "7705872645",
-    "ogrn": "1107746225485",
-    "sector": "Транспорт и логистика",
-    "sector_code": "transport",
-    "sector_profile": "port_logistics",
-    "region": "Москва",
-    "website": "https://delo-group.ru",
-    "e_disclosure_id": "35812",
-    "description": "Крупнейший частный портовый и логистический оператор России. Управляет стивидорными активами (НУТЭП, КСК), контейнерными терминалами и железнодорожным оператором «Рускон».",
-    "bonds": [
-      {
-        "isin": "RU000A101QK2",
-        "name": "ГК Дело БО-001P-01",
-        "coupon_rate": 9.45,
-        "maturity_date": "2025-11-12",
-        "nominal": 1000,
-        "status": "active"
-      },
-      {
-        "isin": "RU000A103Y93",
-        "name": "ГК Дело БО-001P-02",
-        "coupon_rate": 12.0,
-        "maturity_date": "2026-10-01",
-        "nominal": 1000,
-        "status": "active"
-      }
-    ],
-    "ratings": [
-      {
-        "agency": "АКРА",
-        "value": "AA-(RU)",
-        "outlook": "stable",
-        "date": "2024-05-01"
-      }
-    ],
-    "qualitative_flags": {
-      "auditor_big4": true,
-      "qualified_audit": true,
-      "related_party_risk": false,
-      "owner_transparency": true,
-      "litigation_risk": false,
-      "media_negative": false,
-      "management_changes": false,
-      "cross_default_risk": false,
-      "covenant_breach_risk": false,
-      "disclosure_quality": "high"
-    },
-    "data_sources": {
-      "e_disclosure_url": "https://www.e-disclosure.ru/portal/company.aspx?id=35812",
-      "moex_url": "https://www.moex.com/ru/issue.aspx?board=TQCB&code=RU000A101QK2"
-    },
-    "mvp_priority": 1,
-    "added_date": "2026-04-21",
-    "notes": "Крупный эмитент инвестиционного уровня. Важен как якорный пример группы 6 (транспорт). Высокий CAPEX на портовую инфраструктуру."
-  },
-  {
-    "emitter_id": "whoosh-001",
-    "name": "ООО «ВУШ»",
-    "short_name": "Whoosh",
-    "inn": "7710475090",
-    "ogrn": "1187746671840",
-    "sector": "Прочие и диверсифицированные",
-    "sector_code": "other",
-    "sector_profile": "technology_sharing",
-    "region": "Москва",
-    "website": "https://whoosh.bike",
-    "e_disclosure_id": "45920",
-    "description": "Крупнейший оператор шеринга электросамокатов в России. Технологическая платформа + собственный флот СИМ. Наличие акционерного капитала (материнская компания ВУШ Холдинг торгуется на MOEX).",
-    "bonds": [
-      {
-        "isin": "RU000A106HB4",
-        "name": "Whoosh выпуск 2",
-        "coupon_rate": 14.5,
-        "maturity_date": "2026-07-24",
-        "nominal": 1000,
-        "status": "active"
-      },
-      {
-        "isin": "RU000A10BS76",
-        "name": "Whoosh выпуск 4",
-        "coupon_rate": 20.25,
-        "maturity_date": "2028-06-06",
-        "nominal": 1000,
-        "status": "active"
-      }
-    ],
-    "ratings": [
-      {
-        "agency": "АКРА",
-        "value": "A-(RU)",
-        "outlook": "stable",
-        "date": "2024-09-01"
-      }
-    ],
-    "qualitative_flags": {
-      "auditor_big4": true,
-      "qualified_audit": true,
-      "related_party_risk": false,
-      "owner_transparency": true,
-      "litigation_risk": false,
-      "media_negative": false,
-      "management_changes": false,
-      "cross_default_risk": false,
-      "covenant_breach_risk": false,
-      "disclosure_quality": "high"
-    },
-    "data_sources": {
-      "e_disclosure_url": "https://www.e-disclosure.ru/portal/company.aspx?id=45920",
-      "moex_url": "https://www.moex.com/ru/issue.aspx?board=TQCB&code=RU000A106HB4"
-    },
-    "mvp_priority": 1,
-    "added_date": "2026-04-21",
-    "notes": "Технологический эмитент — нестандартный для ВДО. Растущий FCF-отрицательный бизнес. Важен для тестирования блока D и группы 7"
-  }
+  ]
 }
