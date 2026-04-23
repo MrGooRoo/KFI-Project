@@ -53,7 +53,7 @@
             stroke-width: 6;
             stroke-linecap: round;
             stroke-dasharray: 314.159;
-            stroke-dashoffset: calc(314.159 - 314.159 * 85.4 / 100);
+            stroke-dashoffset: calc(314.159 - 314.159 * 84.8 / 100);
             transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -152,7 +152,7 @@
                         <circle class="kfi-ring-progress" cx="60" cy="60" r="50"/>
                     </svg>
                     <div class="kfi-value">
-                        <div class="kfi-number">85.4</div>
+                        <div class="kfi-number">84.8</div>
                         <div class="kfi-sublabel">KFI</div>
                     </div>
                 </div>
@@ -195,11 +195,11 @@
             
             <div>
                 <div class="text-xs font-semibold text-violet-400 mb-1">c</div>
-                <div class="text-4xl font-semibold text-white">41.2</div>
+                <div class="text-4xl font-semibold text-white">35.2</div>
                 <div class="block-label mt-2">Рентабельность</div>
                 <div class="h-1.5 bg-zinc-800 rounded-full mt-4 overflow-hidden">
                     <div class="h-full bg-gradient-to-r from-violet-400 to-fuchsia-500"
-                         style="width: 41.2%"></div>
+                         style="width: 35.2%"></div>
                 </div>
                 <div class="text-[10px] text-zinc-500 mt-2">ROE ≥15% | Маржа ≥12%</div>
             </div>
@@ -348,7 +348,7 @@
 
     <!-- Footer -->
     <div class="px-8 py-6 border-t border-zinc-800 flex items-center justify-between bg-zinc-900">
-        <div class="text-xs text-zinc-500">KFI v2.1 • 2026-04-21T18:54:04.418942</div>
+        <div class="text-xs text-zinc-500">KFI v2.1 • 2026-04-23T18:29:47.254756</div>
         <button onclick="downloadPNG()"
                 class="flex items-center gap-2 bg-white text-zinc-900 font-semibold px-6 py-3 rounded-2xl text-sm hover:bg-amber-200 transition-colors">
             ⬇️ Скачать PNG
@@ -362,7 +362,7 @@
         const ctx = document.getElementById('radarChart');
         const labels = ['A', 'B', 'C', 'D', 'E', 'F'];
         const scores = [
-            100.0, 100.0, 41.2,
+            100.0, 100.0, 35.2,
             100.0, 55.0, 61.5
         ];
 
