@@ -5,209 +5,372 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>КФИ — Рейтинг эмитентов ВДО</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --bg-primary: #0a0e27;
+            --bg-secondary: #151932;
+            --accent-primary: #6366f1;
+            --accent-secondary: #8b5cf6;
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --shadow-glow: 0 0 40px rgba(99, 102, 241, 0.3);
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
             min-height: 100vh;
-            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%);
+            animation: bgShift 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes bgShift {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
+            padding: 40px 24px;
+            position: relative;
+            z-index: 1;
         }
 
+        /* Header with glassmorphism */
         header {
-            background: white;
-            border-radius: 16px;
-            padding: 32px;
-            margin-bottom: 24px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 48px;
+            margin-bottom: 32px;
+            box-shadow: var(--shadow-glow);
+            animation: fadeInDown 0.6s ease;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         h1 {
-            font-size: 2.5rem;
-            color: #1a202c;
-            margin-bottom: 8px;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
         }
 
         .subtitle {
-            color: #718096;
-            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-size: 1.25rem;
+            font-weight: 400;
         }
 
-        .filters {
-            background: white;
+        /* Stats cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+            animation: fadeIn 0.8s ease 0.2s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .stat-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
             border-radius: 16px;
             padding: 24px;
-            margin-bottom: 24px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(99, 102, 241, 0.2);
+            border-color: var(--accent-primary);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Filters */
+        .filters {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 32px;
             display: flex;
-            gap: 16px;
+            gap: 12px;
             flex-wrap: wrap;
+            animation: fadeIn 0.8s ease 0.4s both;
         }
 
         .filter-btn {
-            padding: 10px 20px;
-            border: 2px solid #e2e8f0;
-            background: white;
-            border-radius: 8px;
+            padding: 12px 24px;
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: var(--text-secondary);
             cursor: pointer;
             font-size: 0.95rem;
-            transition: all 0.2s;
             font-weight: 500;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
         }
 
         .filter-btn:hover {
-            border-color: #667eea;
-            color: #667eea;
+            border-color: var(--accent-primary);
+            color: var(--text-primary);
+            transform: translateY(-2px);
         }
 
         .filter-btn.active {
-            background: #667eea;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-color: transparent;
             color: white;
-            border-color: #667eea;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
         }
 
+        /* Table */
         .rating-table {
-            background: white;
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            overflow-x: auto;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 32px;
+            overflow: hidden;
+            animation: fadeIn 0.8s ease 0.6s both;
         }
 
         table {
             width: 100%;
-            border-collapse: collapse;
+            border-collapse: separate;
+            border-spacing: 0 12px;
         }
 
-        thead {
-            background: #f7fafc;
-        }
-
-        th {
+        thead th {
             padding: 16px;
             text-align: left;
             font-weight: 600;
-            color: #4a5568;
-            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        td {
-            padding: 16px;
-            border-top: 1px solid #e2e8f0;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid var(--glass-border);
         }
 
         tbody tr {
-            transition: background 0.2s;
+            background: rgba(255, 255, 255, 0.02);
+            transition: all 0.3s ease;
+            border-radius: 12px;
         }
 
         tbody tr:hover {
-            background: #f7fafc;
+            background: rgba(99, 102, 241, 0.1);
+            transform: scale(1.01);
+        }
+
+        td {
+            padding: 20px 16px;
+            border-top: 1px solid transparent;
+            border-bottom: 1px solid transparent;
+        }
+
+        td:first-child {
+            border-left: 1px solid transparent;
+            border-top-left-radius: 12px;
+            border-bottom-left-radius: 12px;
+        }
+
+        td:last-child {
+            border-right: 1px solid transparent;
+            border-top-right-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+
+        tbody tr:hover td {
+            border-color: rgba(99, 102, 241, 0.3);
         }
 
         .emitter-name {
             font-weight: 600;
-            color: #1a202c;
-            font-size: 1rem;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            margin-bottom: 4px;
         }
 
         .emitter-sector {
-            color: #718096;
-            font-size: 0.85rem;
-            margin-top: 4px;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
         }
 
         .kfi-score {
-            font-size: 1.5rem;
+            font-size: 2rem;
             font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .category-badge {
-            display: inline-block;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-size: 0.875rem;
             font-weight: 600;
+            backdrop-filter: blur(10px);
         }
 
         .category-reliable {
-            background: #c6f6d5;
-            color: #22543d;
+            background: rgba(34, 197, 94, 0.15);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.3);
         }
 
         .category-stable {
-            background: #bee3f8;
-            color: #2c5282;
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.3);
         }
 
         .category-moderate {
-            background: #feebc8;
-            color: #7c2d12;
+            background: rgba(251, 191, 36, 0.15);
+            color: #fbbf24;
+            border: 1px solid rgba(251, 191, 36, 0.3);
         }
 
         .category-high-risk {
-            background: #fed7d7;
-            color: #742a2a;
+            background: rgba(249, 115, 22, 0.15);
+            color: #fb923c;
+            border: 1px solid rgba(249, 115, 22, 0.3);
         }
 
         .category-critical {
-            background: #feb2b2;
-            color: #742a2a;
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.3);
         }
 
         .view-card-btn {
-            padding: 8px 16px;
-            background: #667eea;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
             color: white;
             border: none;
-            border-radius: 6px;
+            border-radius: 10px;
             cursor: pointer;
             font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.2s;
+            font-weight: 600;
+            transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
+            font-family: 'Inter', sans-serif;
         }
 
         .view-card-btn:hover {
-            background: #5568d3;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
         }
 
         .updated {
-            color: #718096;
-            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
         }
 
         footer {
             text-align: center;
-            color: white;
-            margin-top: 32px;
-            padding: 24px;
-            font-size: 0.9rem;
+            margin-top: 48px;
+            padding: 32px;
+            color: var(--text-secondary);
+            animation: fadeIn 1s ease 0.8s both;
         }
 
         .disclaimer {
-            background: rgba(255,255,255,0.1);
-            border-radius: 8px;
-            padding: 16px;
-            margin-top: 16px;
-            font-size: 0.85rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 24px;
+            font-size: 0.875rem;
+            line-height: 1.6;
         }
 
+        footer a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--accent-secondary);
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
             h1 {
-                font-size: 1.8rem;
+                font-size: 2.5rem;
+            }
+
+            header {
+                padding: 32px 24px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
 
             .filters {
@@ -219,21 +382,50 @@
             }
 
             table {
-                font-size: 0.85rem;
+                font-size: 0.875rem;
             }
 
-            th, td {
-                padding: 12px 8px;
+            .kfi-score {
+                font-size: 1.5rem;
             }
+        }
+
+        /* Loading animation */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .loading {
+            animation: pulse 2s ease infinite;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>📊 КФИ — Рейтинг эмитентов ВДО</h1>
+            <h1>КФИ</h1>
             <p class="subtitle">Кредитно-Финансовый Индекс для частных инвесторов</p>
         </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">10</div>
+                <div class="stat-label">Эмитентов</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">86.6</div>
+                <div class="stat-label">Средний КФИ</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">100%</div>
+                <div class="stat-label">Надёжные</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">v2.0</div>
+                <div class="stat-label">Методология</div>
+            </div>
+        </div>
 
         <div class="filters">
             <button class="filter-btn active" data-filter="all">Все эмитенты</button>
@@ -251,7 +443,7 @@
                         <th>КФИ</th>
                         <th>Категория</th>
                         <th>Обновлено</th>
-                        <th>Карточка</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
@@ -261,21 +453,20 @@
         </div>
 
         <footer>
-            <p><strong>КФИ v2.0</strong> — Автоматизированная система анализа эмитентов ВДО</p>
+            <p style="font-size: 1.1rem; margin-bottom: 16px;"><strong>КФИ v2.0</strong> — Автоматизированная система анализа эмитентов ВДО</p>
             <div class="disclaimer">
                 ⚠️ Оценка КФИ сформирована автоматически на основе публично доступных данных.<br>
                 Не является инвестиционной рекомендацией.<br>
                 Инвестирование в ВДО сопряжено с повышенным риском потери капитала.
             </div>
-            <p style="margin-top: 16px;">
-                <a href="https://github.com/MrGooRoo/KFI-Project" style="color: white;">GitHub</a> |
-                <a href="../docs/methodology_v2.0.md" style="color: white;">Методология</a>
+            <p style="margin-top: 24px;">
+                <a href="https://github.com/MrGooRoo/KFI-Project">GitHub</a> |
+                <a href="../docs/methodology_v2.0.md">Методология</a>
             </p>
         </footer>
     </div>
 
     <script>
-        // Данные эмитентов
         const emitters = [
             { id: 'GTLK', name: 'ГТЛК', sector: 'Лизинг', kfi: 94.6, category: 'Надёжный', updated: '25.04.2026' },
             { id: 'delo-001', name: 'Дело', sector: 'Транспорт', kfi: 91.1, category: 'Надёжный', updated: '25.04.2026' },
@@ -300,14 +491,6 @@
             return map[category] || 'category-stable';
         }
 
-        function getKfiColor(kfi) {
-            if (kfi >= 80) return '#22543d';
-            if (kfi >= 60) return '#2c5282';
-            if (kfi >= 40) return '#7c2d12';
-            if (kfi >= 20) return '#742a2a';
-            return '#742a2a';
-        }
-
         function renderTable(filter = 'all') {
             const tbody = document.getElementById('tableBody');
             tbody.innerHTML = '';
@@ -318,15 +501,16 @@
             if (filter === 'moderate') filtered = emitters.filter(e => e.kfi >= 40 && e.kfi < 60);
             if (filter === 'high') filtered = emitters.filter(e => e.kfi >= 20 && e.kfi < 40);
 
-            filtered.forEach(emitter => {
+            filtered.forEach((emitter, index) => {
                 const row = document.createElement('tr');
+                row.style.animationDelay = `${index * 0.05}s`;
                 row.innerHTML = `
                     <td>
                         <div class="emitter-name">${emitter.name}</div>
                         <div class="emitter-sector">${emitter.sector}</div>
                     </td>
                     <td>
-                        <span class="kfi-score" style="color: ${getKfiColor(emitter.kfi)}">${emitter.kfi}</span>
+                        <span class="kfi-score">${emitter.kfi}</span>
                     </td>
                     <td>
                         <span class="category-badge ${getCategoryClass(emitter.category)}">${emitter.category}</span>
@@ -334,7 +518,7 @@
                     <td class="updated">${emitter.updated}</td>
                     <td>
                         <a href="../output/cards/card_${emitter.id.toLowerCase()}.html" class="view-card-btn" target="_blank">
-                            Открыть карточку
+                            Открыть
                         </a>
                     </td>
                 `;
@@ -342,7 +526,6 @@
             });
         }
 
-        // Фильтры
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -351,7 +534,6 @@
             });
         });
 
-        // Начальная отрисовка
         renderTable();
     </script>
 </body>
