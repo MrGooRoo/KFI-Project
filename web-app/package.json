@@ -1,8 +1,7 @@
 {
-  "name": "kfi-web-app",
+  "name": "react-vite-tailwind",
   "private": true,
-  "version": "1.0.0",
-  "description": "КФИ — Кредитно-Финансовый Индекс | React Web Application",
+  "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
