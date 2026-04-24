@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>КФИ — Рейтинг эмитентов ВДО</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #1a202c;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #718096;
+            font-size: 1.1rem;
+        }
+
+        .filters {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid #e2e8f0;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .rating-table {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: #f7fafc;
+        }
+
+        th {
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+            color: #4a5568;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 16px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        tbody tr {
+            transition: background 0.2s;
+        }
+
+        tbody tr:hover {
+            background: #f7fafc;
+        }
+
+        .emitter-name {
+            font-weight: 600;
+            color: #1a202c;
+            font-size: 1rem;
+        }
+
+        .emitter-sector {
+            color: #718096;
+            font-size: 0.85rem;
+            margin-top: 4px;
+        }
+
+        .kfi-score {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .category-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .category-reliable {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .category-stable {
+            background: #bee3f8;
+            color: #2c5282;
+        }
+
+        .category-moderate {
+            background: #feebc8;
+            color: #7c2d12;
+        }
+
+        .category-high-risk {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+
+        .category-critical {
+            background: #feb2b2;
+            color: #742a2a;
+        }
+
+        .view-card-btn {
+            padding: 8px 16px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .view-card-btn:hover {
+            background: #5568d3;
+            transform: translateY(-1px);
+        }
+
+        .updated {
+            color: #718096;
+            font-size: 0.85rem;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 32px;
+            padding: 24px;
+            font-size: 0.9rem;
+        }
+
+        .disclaimer {
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 16px;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .filters {
+                flex-direction: column;
+            }
+
+            .filter-btn {
+                width: 100%;
+            }
+
+            table {
+                font-size: 0.85rem;
+            }
+
+            th, td {
+                padding: 12px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 КФИ — Рейтинг эмитентов ВДО</h1>
+            <p class="subtitle">Кредитно-Финансовый Индекс для частных инвесторов</p>
+        </header>
+
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">Все эмитенты</button>
+            <button class="filter-btn" data-filter="reliable">Надёжные (80+)</button>
+            <button class="filter-btn" data-filter="stable">Стабильные (60-79)</button>
+            <button class="filter-btn" data-filter="moderate">Умеренный риск (40-59)</button>
+            <button class="filter-btn" data-filter="high">Высокий риск (20-39)</button>
+        </div>
+
+        <div class="rating-table">
+            <table id="emittersTable">
+                <thead>
+                    <tr>
+                        <th>Эмитент</th>
+                        <th>КФИ</th>
+                        <th>Категория</th>
+                        <th>Обновлено</th>
+                        <th>Карточка</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Данные загружаются через JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <footer>
+            <p><strong>КФИ v2.0</strong> — Автоматизированная система анализа эмитентов ВДО</p>
+            <div class="disclaimer">
+                ⚠️ Оценка КФИ сформирована автоматически на основе публично доступных данных.<br>
+                Не является инвестиционной рекомендацией.<br>
+                Инвестирование в ВДО сопряжено с повышенным риском потери капитала.
+            </div>
+            <p style="margin-top: 16px;">
+                <a href="https://github.com/MrGooRoo/KFI-Project" style="color: white;">GitHub</a> |
+                <a href="../docs/methodology_v2.0.md" style="color: white;">Методология</a>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Данные эмитентов
+        const emitters = [
+            { id: 'GTLK', name: 'ГТЛК', sector: 'Лизинг', kfi: 94.6, category: 'Надёжный', updated: '25.04.2026' },
+            { id: 'delo-001', name: 'Дело', sector: 'Транспорт', kfi: 91.1, category: 'Надёжный', updated: '25.04.2026' },
+            { id: 'naftatrans-001', name: 'Нафтатранс', sector: 'Транспорт', kfi: 87.2, category: 'Надёжный', updated: '25.04.2026' },
+            { id: 'myasnichiy-001', name: 'Мясничий', sector: 'Производство', kfi: 87.2, category: 'Надёжный', updated: '25.04.2026' },
+            { id: 'whoosh-001', name: 'Whoosh', sector: 'Транспорт', kfi: 86.8, category: 'Надёжный', updated: '25.04.2026' },
+            { id: 'legenda-001', name: 'Легенда', sector: 'Девелопмент', kfi: 85.5, category: 'Надёжный', updated: '25.04.2026' },
+            { id: 'pkb-001', name: 'ПКБ', sector: 'МФО', kfi: 85.5, category: 'Надёжный', updated: '25.04.2026' },
+            { id: 'evrotrans-001', name: 'Евротранс', sector: 'Транспорт', kfi: 84.8, category: 'Надёжный', updated: '25.04.2026' },
+            { id: 'CARMONEY', name: 'Кармани', sector: 'МФО', kfi: 82.7, category: 'Надёжный', updated: '25.04.2026' },
+            { id: 'SETL', name: 'Сетл Групп', sector: 'Торговля', kfi: 81.8, category: 'Надёжный', updated: '25.04.2026' }
+        ];
+
+        function getCategoryClass(category) {
+            const map = {
+                'Надёжный': 'category-reliable',
+                'Стабильный': 'category-stable',
+                'Умеренный риск': 'category-moderate',
+                'Высокий риск': 'category-high-risk',
+                'Критический': 'category-critical'
+            };
+            return map[category] || 'category-stable';
+        }
+
+        function getKfiColor(kfi) {
+            if (kfi >= 80) return '#22543d';
+            if (kfi >= 60) return '#2c5282';
+            if (kfi >= 40) return '#7c2d12';
+            if (kfi >= 20) return '#742a2a';
+            return '#742a2a';
+        }
+
+        function renderTable(filter = 'all') {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+
+            let filtered = emitters;
+            if (filter === 'reliable') filtered = emitters.filter(e => e.kfi >= 80);
+            if (filter === 'stable') filtered = emitters.filter(e => e.kfi >= 60 && e.kfi < 80);
+            if (filter === 'moderate') filtered = emitters.filter(e => e.kfi >= 40 && e.kfi < 60);
+            if (filter === 'high') filtered = emitters.filter(e => e.kfi >= 20 && e.kfi < 40);
+
+            filtered.forEach(emitter => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>
+                        <div class="emitter-name">${emitter.name}</div>
+                        <div class="emitter-sector">${emitter.sector}</div>
+                    </td>
+                    <td>
+                        <span class="kfi-score" style="color: ${getKfiColor(emitter.kfi)}">${emitter.kfi}</span>
+                    </td>
+                    <td>
+                        <span class="category-badge ${getCategoryClass(emitter.category)}">${emitter.category}</span>
+                    </td>
+                    <td class="updated">${emitter.updated}</td>
+                    <td>
+                        <a href="../output/cards/card_${emitter.id.toLowerCase()}.html" class="view-card-btn" target="_blank">
+                            Открыть карточку
+                        </a>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Фильтры
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderTable(btn.dataset.filter);
+            });
+        });
+
+        // Начальная отрисовка
+        renderTable();
+    </script>
+</body>
+</html>

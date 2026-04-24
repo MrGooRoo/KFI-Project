@@ -126,10 +126,10 @@ class CardGenerator:
             raw_data = load_financial_data(emitter_id)
             if raw_data:
                 financials = rsbu_to_financials(raw_data)
-                print(f"  ✅ Реальные данные загружены для {emitter_id}")
+                print(f"  [OK] Реальные данные загружены для {emitter_id}")
                 return financials
 
-        print(f"  ⚠️ Нет сохранённых данных для {emitter_id} — используются демо-данные")
+        print(f"  [WARN] Нет сохранённых данных для {emitter_id} — используются демо-данные")
         return MOCK_FINANCIALS.copy()
 
     def enrich_block_e(self, emitter: dict) -> dict:
@@ -149,9 +149,9 @@ class CardGenerator:
                     bond["ytm"] = market_data.get("ytm")
                     bond["market_price_pct"] = market_data.get("market_price_pct")
                     bond["duration"] = market_data.get("duration")
-                    print(f"    📊 MOEX: {isin} YTM={market_data.get('ytm')}%")
+                    print(f"    [MOEX] {isin} YTM={market_data.get('ytm')}%")
             except Exception as e:
-                print(f"    ⚠️ MOEX ошибка для {isin}: {e}")
+                print(f"    [ERROR] MOEX ошибка для {isin}: {e}")
 
         return emitter
 
@@ -172,10 +172,10 @@ class CardGenerator:
                 result = self.kfi_calculator.calculate_kfi(
                     emitter, financials, "2024-Q4"
                 )
-                print(f"  🧮 КФИ рассчитан: {result['kfi_final']} — {result['category']}")
+                print(f"  [CALC] КФИ рассчитан: {result['kfi_final']} — {result['category']}")
                 return result
             except Exception as e:
-                print(f"  ❌ Ошибка расчёта {emitter_id}: {e}")
+                print(f"  [ERROR] Ошибка расчёта {emitter_id}: {e}")
                 return self._fallback_calculation(emitter)
 
         return self._fallback_calculation(emitter)
@@ -255,10 +255,10 @@ class CardGenerator:
                 await page.wait_for_timeout(1000)
                 await page.screenshot(path=str(png_path), scale="device")
                 await browser.close()
-                print(f"  📸 PNG сохранён: {png_path.name}")
+                print(f"  [PNG] Сохранён: {png_path.name}")
                 return True
         except Exception as e:
-            print(f"  ❌ Не удалось создать PNG: {e}")
+            print(f"  [ERROR] Не удалось создать PNG: {e}")
             return False
 
     def generate_card(self, emitter_id: str):
@@ -269,7 +269,7 @@ class CardGenerator:
         emitters = self.load_emitters()
         emitter = emitters.get(emitter_id)
         if not emitter:
-            print(f"❌ Эмитент {emitter_id} не найден")
+            print(f"[ERROR] Эмитент {emitter_id} не найден")
             return
 
         print(f"\n{'='*50}")
@@ -290,7 +290,7 @@ class CardGenerator:
 
         with open(html_path, "w", encoding="utf-8") as f:
             f.write(html)
-        print(f"  ✅ HTML-карточка сохранена")
+        print(f"  [OK] HTML-карточка сохранена")
 
         if PLAYWRIGHT_AVAILABLE:
             asyncio.run(self.generate_png(html_path, png_path))
@@ -302,7 +302,7 @@ class CardGenerator:
         print(f"Найдено {len(emitters)} эмитентов.\n")
         for emitter_id in emitters:
             self.generate_card(emitter_id)
-        print(f"\n🎉 Все карточки сохранены в: {self.output_dir}")
+        print(f"\n[DONE] Все карточки сохранены в: {self.output_dir}")
 
 
 if __name__ == "__main__":
