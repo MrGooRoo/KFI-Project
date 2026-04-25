@@ -24,13 +24,16 @@ KFI-Project/
 │   ├── main.py                 # Главный пайплайн
 │   ├── moex_parser.py          # Парсер MOEX ISS API
 │   ├── financial_parser.py     # Парсер финансовой отчётности
+│   ├── financial_data_manager.py # Менеджер финансовых данных (NEW)
+│   ├── edisclosure_scraper.py  # Playwright скрапер e-disclosure.ru (NEW)
 │   ├── kfi_calculator.py       # Расчётный движок КФИ
 │   ├── card_generator.py       # Генератор визуальных карточек
 │   ├── card_template.html      # HTML-шаблон карточки
 │   └── requirements.txt        # Python зависимости
 ├── data/
-│   ├── emitters.json           # База эмитентов (11 шт)
+│   ├── emitters.json           # База эмитентов (10 шт)
 │   ├── schema.json             # JSON Schema
+│   ├── financials/             # Финансовые данные эмитентов (NEW)
 │   └── calculations/           # Результаты расчётов КФИ
 ├── output/
 │   └── cards/                  # Сгенерированные HTML/PNG карточки
@@ -61,6 +64,13 @@ playwright install chromium
 ```bash
 # Полный путь к Python (Windows)
 set PYTHON=C:\Users\Mr_GooRoo\AppData\Local\Programs\Python\Python314\python.exe
+
+# Ввод финансовых данных (NEW)
+%PYTHON% src/financial_data_manager.py CARMONEY
+
+# Просмотр сохранённых данных (NEW)
+%PYTHON% src/financial_data_manager.py list
+%PYTHON% src/financial_data_manager.py list CARMONEY
 
 # Расчёт КФИ для всех эмитентов
 %PYTHON% src/main.py calculate
@@ -253,13 +263,20 @@ set PYTHON=C:\Users\Mr_GooRoo\AppData\Local\Programs\Python\Python314\python.exe
 
 ## Известные проблемы
 
-### 1. Отсутствие реальных финансовых данных
+### 1. Автоматический парсинг финансовых данных
 
-**Проблема**: Для большинства эмитентов используются демо-данные.
+**Проблема**: e-disclosure.ru блокирует автоматические запросы (403 Forbidden).
 
-**Решение**: Доработать `financial_parser.py` для автоматического парсинга e-disclosure.ru.
+**Текущее решение**: 
+- ✅ Создан `financial_data_manager.py` — улучшенный ручной ввод с валидацией
+- ✅ Создан `edisclosure_scraper.py` — Playwright скрапер (экспериментально)
+- ✅ Структурированное хранение в `data/financials/`
+
+**Статус**: Частично решено. Ручной ввод работает, автоматический парсинг требует доработки.
 
 **Приоритет**: Высокий
+
+**Документация**: `docs/financial_data_guide.md`
 
 ### 2. MOEX API возвращает пустые данные
 

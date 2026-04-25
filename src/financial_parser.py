@@ -24,6 +24,13 @@ from dataclasses import dataclass, field, asdict
 
 import requests
 
+try:
+    from edisclosure_scraper import EDisclosureScraper
+    SCRAPER_AVAILABLE = True
+except ImportError:
+    SCRAPER_AVAILABLE = False
+    logger.warning("EDisclosureScraper не доступен. Используйте ручной ввод.")
+
 # ─── Настройка логирования ────────────────────────────────────────────────────
 logging.basicConfig(
     level=logging.INFO,
@@ -212,7 +219,23 @@ class FinancialParser:
         return None
 
     def _try_api(self, disclosure_id: str, emitter_id: str) -> Optional[dict]:
-        """Пробует получить данные через e-disclosure API."""
+        """Пробует получить данные через e-disclosure парсер."""
+
+        # Сначала пробуем новый скрапер
+        if SCRAPER_AVAILABLE:
+            logger.info("  Запуск Playwright скрапера...")
+            try:
+                with EDisclosureScraper(headless=True) as scraper:
+                    data = scraper.fetch_all_financials(disclosure_id)
+                    if data and len(data) > 5:  # Проверяем что получили данные
+                        logger.info(f"  [OK] Скрапер: получено {len(data)} показателей")
+                        return self._normalize_scraper_data(data)
+                    else:
+                        logger.info("  [WARN] Скрапер: данные не найдены")
+            except Exception as e:
+                logger.error(f"  [ERROR] Ошибка скрапера: {e}")
+
+        # Fallback на старый API метод
         logger.info("  Запрос к e-disclosure API...")
         reports = self.api.get_financial_reports(disclosure_id)
         if not reports:
@@ -233,6 +256,26 @@ class FinancialParser:
         for code, field_name in RSBUParser.CODE_MAP.items():
             if code in raw_data:
                 setattr(metrics, field_name, raw_data[code])
+        return asdict(metrics)
+
+    def _normalize_scraper_data(self, raw_data: dict) -> Optional[dict]:
+        """Нормализует данные из EDisclosureScraper в формат RSBUMetrics."""
+        metrics = RSBUMetrics()
+
+        # Копируем все поля которые совпадают с RSBUMetrics
+        for field in ['non_current_assets', 'current_assets', 'inventory',
+                      'short_term_investments', 'cash', 'equity', 'long_term_debt',
+                      'current_liabilities', 'short_term_debt', 'total_assets',
+                      'revenue', 'operating_profit', 'interest_expenses', 'net_income',
+                      'cfo', 'capex']:
+            if field in raw_data:
+                setattr(metrics, field, raw_data[field])
+
+        # Метаданные
+        metrics.period = raw_data.get('year', datetime.now().year)
+        metrics.source_url = f"e-disclosure.ru (company_id: {raw_data.get('company_id', '')})"
+        metrics.fetched_at = raw_data.get('fetched_at', datetime.now().isoformat())
+
         return asdict(metrics)
 
     def _manual_input(self, emitter: dict) -> Optional[dict]:
