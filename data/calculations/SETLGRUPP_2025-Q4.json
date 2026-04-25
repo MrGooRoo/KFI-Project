@@ -1,0 +1,30 @@
+{
+  "id": "kfi_SETLGRUPP_2025Q4",
+  "emitter_id": "SETLGRUPP",
+  "period": "2025-Q4",
+  "report_date": "2025-02-15",
+  "block_scores": {
+    "block_a": 100.0,
+    "block_b": 100.0,
+    "block_c": 100.0,
+    "block_d": 100.0,
+    "block_e": 50.0,
+    "block_f": 75
+  },
+  "kfi_base": 91.2,
+  "kfi_final": 91.2,
+  "category": "Надёжный",
+  "risk_flags": {
+    "bankruptcy_risk": false,
+    "revenue_quality_risk": false,
+    "bond_concentration_risk": false,
+    "data_missing": false,
+    "young_issuer": false,
+    "ebitda_approximated": false
+  },
+  "qualitative_adjustments": {
+    "block_f_contribution": 75
+  },
+  "verified_by": "test_engine",
+  "calculated_at": "2026-04-25T19:41:10.723892"
+}
