@@ -1,0 +1,96 @@
+{
+  "calculations": [
+    {
+      "id": "kfi_CARMONEY_2024Q4",
+      "emitter_id": "CARMONEY",
+      "period": "2024-Q4",
+      "report_date": "2025-02-15",
+      "block_scores": {
+        "block_a": 100.0,
+        "block_b": 100.0,
+        "block_c": 29.9,
+        "block_d": 100.0,
+        "block_e": 95,
+        "block_f": 93
+      },
+      "kfi_base": 91.9,
+      "kfi_final": 82.7,
+      "category": "Надёжный",
+      "risk_flags": {
+        "bankruptcy_risk": false,
+        "revenue_quality_risk": true,
+        "bond_concentration_risk": false,
+        "data_missing": false,
+        "young_issuer": false,
+        "ebitda_approximated": true
+      },
+      "qualitative_adjustments": {
+        "block_f_contribution": 93
+      },
+      "verified_by": "test_engine",
+      "calculated_at": "2026-04-25T03:20:59.533209"
+    },
+    {
+      "id": "kfi_GTLK_2024Q4",
+      "emitter_id": "GTLK",
+      "period": "2024-Q4",
+      "report_date": "2025-02-15",
+      "block_scores": {
+        "block_a": 100.0,
+        "block_b": 100.0,
+        "block_c": 41.2,
+        "block_d": 100.0,
+        "block_e": 103,
+        "block_f": 100.0
+      },
+      "kfi_base": 94.6,
+      "kfi_final": 94.6,
+      "category": "Надёжный",
+      "risk_flags": {
+        "bankruptcy_risk": false,
+        "revenue_quality_risk": false,
+        "bond_concentration_risk": false,
+        "data_missing": false,
+        "young_issuer": false,
+        "ebitda_approximated": false
+      },
+      "qualitative_adjustments": {
+        "block_f_contribution": 100.0
+      },
+      "verified_by": "test_engine",
+      "calculated_at": "2026-04-25T03:20:59.533770"
+    },
+    {
+      "id": "kfi_SETL_2024Q4",
+      "emitter_id": "SETL",
+      "period": "2024-Q4",
+      "report_date": "2025-02-15",
+      "block_scores": {
+        "block_a": 100.0,
+        "block_b": 100.0,
+        "block_c": 35.0,
+        "block_d": 100.0,
+        "block_e": 85.0,
+        "block_f": 93
+      },
+      "kfi_base": 90.9,
+      "kfi_final": 81.8,
+      "category": "Надёжный",
+      "risk_flags": {
+        "bankruptcy_risk": false,
+        "revenue_quality_risk": true,
+        "bond_concentration_risk": false,
+        "data_missing": false,
+        "young_issuer": false,
+        "ebitda_approximated": false
+      },
+      "qualitative_adjustments": {
+        "block_f_contribution": 93
+      },
+      "verified_by": "test_engine",
+      "calculated_at": "2026-04-25T03:20:59.534150"
+    }
+  ],
+  "version": "2.1",
+  "generated": "2026-04-25T03:20:59.534810"
+}
