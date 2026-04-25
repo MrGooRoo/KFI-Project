@@ -8,13 +8,13 @@
       "block_scores": {
         "block_a": 100.0,
         "block_b": 100.0,
-        "block_c": 29.9,
+        "block_c": 35.0,
         "block_d": 100.0,
         "block_e": 95,
         "block_f": 93
       },
-      "kfi_base": 91.9,
-      "kfi_final": 82.7,
+      "kfi_base": 92.4,
+      "kfi_final": 83.2,
       "category": "Надёжный",
       "risk_flags": {
         "bankruptcy_risk": false,
@@ -22,13 +22,13 @@
         "bond_concentration_risk": false,
         "data_missing": false,
         "young_issuer": false,
-        "ebitda_approximated": true
+        "ebitda_approximated": false
       },
       "qualitative_adjustments": {
         "block_f_contribution": 93
       },
       "verified_by": "test_engine",
-      "calculated_at": "2026-04-25T03:20:59.533209"
+      "calculated_at": "2026-04-25T16:05:13.282980"
     },
     {
       "id": "kfi_GTLK_2024Q4",
@@ -58,7 +58,7 @@
         "block_f_contribution": 100.0
       },
       "verified_by": "test_engine",
-      "calculated_at": "2026-04-25T03:20:59.533770"
+      "calculated_at": "2026-04-25T16:05:13.283343"
     },
     {
       "id": "kfi_SETL_2024Q4",
@@ -88,9 +88,219 @@
         "block_f_contribution": 93
       },
       "verified_by": "test_engine",
-      "calculated_at": "2026-04-25T03:20:59.534150"
+      "calculated_at": "2026-04-25T16:05:13.283656"
+    },
+    {
+      "id": "kfi_legenda-001_2024Q4",
+      "emitter_id": "legenda-001",
+      "period": "2024-Q4",
+      "report_date": "2025-02-15",
+      "block_scores": {
+        "block_a": 100.0,
+        "block_b": 100.0,
+        "block_c": 41.2,
+        "block_d": 100.0,
+        "block_e": 55.0,
+        "block_f": 75
+      },
+      "kfi_base": 86.1,
+      "kfi_final": 86.1,
+      "category": "Надёжный",
+      "risk_flags": {
+        "bankruptcy_risk": false,
+        "revenue_quality_risk": false,
+        "bond_concentration_risk": false,
+        "data_missing": false,
+        "young_issuer": false,
+        "ebitda_approximated": false
+      },
+      "qualitative_adjustments": {
+        "block_f_contribution": 75
+      },
+      "verified_by": "test_engine",
+      "calculated_at": "2026-04-25T16:05:13.283965"
+    },
+    {
+      "id": "kfi_pkb-001_2024Q4",
+      "emitter_id": "pkb-001",
+      "period": "2024-Q4",
+      "report_date": "2025-02-15",
+      "block_scores": {
+        "block_a": 100.0,
+        "block_b": 100.0,
+        "block_c": 41.2,
+        "block_d": 100.0,
+        "block_e": 55.0,
+        "block_f": 75
+      },
+      "kfi_base": 86.1,
+      "kfi_final": 86.1,
+      "category": "Надёжный",
+      "risk_flags": {
+        "bankruptcy_risk": false,
+        "revenue_quality_risk": false,
+        "bond_concentration_risk": false,
+        "data_missing": false,
+        "young_issuer": false,
+        "ebitda_approximated": false
+      },
+      "qualitative_adjustments": {
+        "block_f_contribution": 75
+      },
+      "verified_by": "test_engine",
+      "calculated_at": "2026-04-25T16:05:13.284272"
+    },
+    {
+      "id": "kfi_evrotrans-001_2024Q4",
+      "emitter_id": "evrotrans-001",
+      "period": "2024-Q4",
+      "report_date": "2025-02-15",
+      "block_scores": {
+        "block_a": 100.0,
+        "block_b": 100.0,
+        "block_c": 41.2,
+        "block_d": 100.0,
+        "block_e": 55.0,
+        "block_f": 61.5
+      },
+      "kfi_base": 85.4,
+      "kfi_final": 85.4,
+      "category": "Надёжный",
+      "risk_flags": {
+        "bankruptcy_risk": false,
+        "revenue_quality_risk": false,
+        "bond_concentration_risk": false,
+        "data_missing": false,
+        "young_issuer": false,
+        "ebitda_approximated": false
+      },
+      "qualitative_adjustments": {
+        "block_f_contribution": 61.5
+      },
+      "verified_by": "test_engine",
+      "calculated_at": "2026-04-25T16:05:13.284575"
+    },
+    {
+      "id": "kfi_naftatrans-001_2024Q4",
+      "emitter_id": "naftatrans-001",
+      "period": "2024-Q4",
+      "report_date": "2025-02-15",
+      "block_scores": {
+        "block_a": 100.0,
+        "block_b": 100.0,
+        "block_c": 41.2,
+        "block_d": 100.0,
+        "block_e": 80.0,
+        "block_f": 34.5
+      },
+      "kfi_base": 87.8,
+      "kfi_final": 87.8,
+      "category": "Надёжный",
+      "risk_flags": {
+        "bankruptcy_risk": false,
+        "revenue_quality_risk": false,
+        "bond_concentration_risk": false,
+        "data_missing": false,
+        "young_issuer": false,
+        "ebitda_approximated": false
+      },
+      "qualitative_adjustments": {
+        "block_f_contribution": 34.5
+      },
+      "verified_by": "test_engine",
+      "calculated_at": "2026-04-25T16:05:13.284882"
+    },
+    {
+      "id": "kfi_myasnichiy-001_2024Q4",
+      "emitter_id": "myasnichiy-001",
+      "period": "2024-Q4",
+      "report_date": "2025-02-15",
+      "block_scores": {
+        "block_a": 100.0,
+        "block_b": 100.0,
+        "block_c": 41.2,
+        "block_d": 100.0,
+        "block_e": 80.0,
+        "block_f": 34.5
+      },
+      "kfi_base": 87.8,
+      "kfi_final": 87.8,
+      "category": "Надёжный",
+      "risk_flags": {
+        "bankruptcy_risk": false,
+        "revenue_quality_risk": false,
+        "bond_concentration_risk": false,
+        "data_missing": false,
+        "young_issuer": false,
+        "ebitda_approximated": false
+      },
+      "qualitative_adjustments": {
+        "block_f_contribution": 34.5
+      },
+      "verified_by": "test_engine",
+      "calculated_at": "2026-04-25T16:05:13.285180"
+    },
+    {
+      "id": "kfi_delo-001_2024Q4",
+      "emitter_id": "delo-001",
+      "period": "2024-Q4",
+      "report_date": "2025-02-15",
+      "block_scores": {
+        "block_a": 100.0,
+        "block_b": 100.0,
+        "block_c": 41.2,
+        "block_d": 100.0,
+        "block_e": 80.0,
+        "block_f": 100.0
+      },
+      "kfi_base": 91.1,
+      "kfi_final": 91.1,
+      "category": "Надёжный",
+      "risk_flags": {
+        "bankruptcy_risk": false,
+        "revenue_quality_risk": false,
+        "bond_concentration_risk": false,
+        "data_missing": false,
+        "young_issuer": false,
+        "ebitda_approximated": false
+      },
+      "qualitative_adjustments": {
+        "block_f_contribution": 100.0
+      },
+      "verified_by": "test_engine",
+      "calculated_at": "2026-04-25T16:05:13.285478"
+    },
+    {
+      "id": "kfi_whoosh-001_2024Q4",
+      "emitter_id": "whoosh-001",
+      "period": "2024-Q4",
+      "report_date": "2025-02-15",
+      "block_scores": {
+        "block_a": 100.0,
+        "block_b": 100.0,
+        "block_c": 41.2,
+        "block_d": 100.0,
+        "block_e": 55.0,
+        "block_f": 100.0
+      },
+      "kfi_base": 87.4,
+      "kfi_final": 87.4,
+      "category": "Надёжный",
+      "risk_flags": {
+        "bankruptcy_risk": false,
+        "revenue_quality_risk": false,
+        "bond_concentration_risk": false,
+        "data_missing": false,
+        "young_issuer": false,
+        "ebitda_approximated": false
+      },
+      "qualitative_adjustments": {
+        "block_f_contribution": 100.0
+      },
+      "verified_by": "test_engine",
+      "calculated_at": "2026-04-25T16:05:13.285781"
     }
   ],
   "version": "2.1",
-  "generated": "2026-04-25T03:20:59.534810"
+  "generated": "2026-04-25T16:05:13.286434"
 }
