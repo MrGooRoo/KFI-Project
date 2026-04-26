@@ -27,6 +27,7 @@ from moex_parser import MOEXBondParser, load_emitters
 from financial_data_manager import FinancialDataManager
 from kfi_calculator import KfiCalculator
 from card_generator import CardGenerator
+from pdf_financial_extractor import PDFFinancialExtractor
 
 logging.basicConfig(
     level=logging.INFO,
@@ -46,6 +47,7 @@ class EmitterPipeline:
         self.financial_manager = FinancialDataManager()
         self.kfi_calculator = KfiCalculator()
         self.card_generator = CardGenerator()
+        self.pdf_extractor = PDFFinancialExtractor()
         self.emitters = load_emitters()
 
     def run(self, emitter_id: str, period: str = None, skip_parsing: bool = False):
@@ -192,7 +194,7 @@ class EmitterPipeline:
     def _ensure_complete_data(self, emitter_id: str, period: str,
                              financial_data: Optional[Any]) -> Optional[Any]:
         """
-        Проверяет полноту данных и запускает ручной ввод если нужно.
+        Проверяет полноту данных и запускает извлечение из PDF или ручной ввод.
         """
         if financial_data:
             # Проверяем критические поля
@@ -205,17 +207,105 @@ class EmitterPipeline:
             else:
                 logger.warning(f"      [WARN] Отсутствуют поля: {', '.join(missing_fields)}")
 
-        # Данных нет или они неполные - запускаем ручной ввод
+        # Данных нет или они неполные
         logger.info("\n" + "="*70)
-        logger.info("  ТРЕБУЕТСЯ РУЧНОЙ ВВОД ФИНАНСОВЫХ ДАННЫХ")
+        logger.info("  ТРЕБУЕТСЯ ДОПОЛНЕНИЕ ФИНАНСОВЫХ ДАННЫХ")
         logger.info("="*70 + "\n")
 
-        response = input("Запустить интерактивный ввод данных? (y/n): ").strip().lower()
-        if response == 'y':
+        # Шаг 1: Предлагаем загрузить PDF
+        print("Варианты:")
+        print("  1. Загрузить PDF-отчёт (автоматическое извлечение данных)")
+        print("  2. Ввести данные вручную")
+        print("  3. Пропустить (использовать демо-данные)")
+
+        choice = input("\nВыберите вариант (1/2/3): ").strip()
+
+        if choice == '1':
+            # Извлечение из PDF
+            pdf_path = input("Укажите путь к PDF-файлу: ").strip()
+            logger.info(f"\n[PDF] Извлечение данных из {pdf_path}...")
+
+            try:
+                extracted_data = self.pdf_extractor.extract_from_pdf(pdf_path, emitter_id, period)
+
+                if extracted_data:
+                    # Проверяем, все ли поля извлечены
+                    missing_after_pdf = [f for f in required_fields
+                                        if getattr(extracted_data, f, None) is None]
+
+                    if not missing_after_pdf:
+                        logger.info("[OK] Все данные успешно извлечены из PDF")
+                        # Сохраняем данные
+                        self.financial_manager.save_financial_data(extracted_data)
+                        return extracted_data
+                    else:
+                        logger.warning(f"[WARN] Из PDF не извлечены: {', '.join(missing_after_pdf)}")
+                        logger.info("\nТребуется ручной ввод недостающих полей...")
+
+                        # Дополняем недостающие поля вручную
+                        financial_data = self._manual_input_missing_fields(
+                            extracted_data, missing_after_pdf
+                        )
+                        return financial_data
+                else:
+                    logger.error("[ERROR] Не удалось извлечь данные из PDF")
+                    return self._fallback_to_manual_input(emitter_id)
+
+            except Exception as e:
+                logger.error(f"[ERROR] Ошибка при обработке PDF: {e}")
+                return self._fallback_to_manual_input(emitter_id)
+
+        elif choice == '2':
+            # Полный ручной ввод
             financial_data = self.financial_manager.interactive_input(emitter_id)
             return financial_data
+
         else:
-            logger.warning("Ручной ввод пропущен. Будут использованы демо-данные.")
+            # Пропустить
+            logger.warning("Ввод данных пропущен. Будут использованы демо-данные.")
+            return None
+
+    def _manual_input_missing_fields(self, data: Any, missing_fields: list) -> Any:
+        """Запрашивает ручной ввод только для недостающих полей."""
+        logger.info("\n" + "="*70)
+        logger.info("  РУЧНОЙ ВВОД НЕДОСТАЮЩИХ ПОЛЕЙ")
+        logger.info("="*70 + "\n")
+
+        field_names = {
+            'revenue': 'Выручка',
+            'equity': 'Капитал и резервы',
+            'cfo': 'Денежный поток от операционной деятельности',
+            'current_assets': 'Оборотные активы',
+            'current_liabilities': 'Краткосрочные обязательства',
+            'operating_profit': 'Операционная прибыль (EBIT)',
+            'net_income': 'Чистая прибыль',
+            'interest_expenses': 'Процентные расходы',
+            'capex': 'Капитальные затраты',
+        }
+
+        for field in missing_fields:
+            field_label = field_names.get(field, field)
+            while True:
+                value_str = input(f"{field_label} (тыс. руб.): ").strip()
+                try:
+                    value = float(value_str.replace(' ', '').replace(',', '.'))
+                    setattr(data, field, value)
+                    break
+                except ValueError:
+                    print("  [ERROR] Введите числовое значение")
+
+        # Сохраняем дополненные данные
+        self.financial_manager.save_financial_data(data)
+        logger.info("\n[OK] Данные дополнены и сохранены")
+        return data
+
+    def _fallback_to_manual_input(self, emitter_id: str) -> Optional[Any]:
+        """Запасной вариант: полный ручной ввод."""
+        response = input("\nПерейти к полному ручному вводу? (y/n): ").strip().lower()
+        if response == 'y':
+            return self.financial_manager.interactive_input(emitter_id)
+        else:
+            logger.warning("Ввод данных пропущен. Будут использованы демо-данные.")
             return None
 
     def _calculate_kfi(self, emitter: Dict, financial_data: Any, period: str) -> Optional[Dict]:
